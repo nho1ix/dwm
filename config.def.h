@@ -1,13 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
-/* Constants */
-#define TERMINAL "st"
-#define TERMCLASS "St"
-
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
+static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
 //static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -17,50 +13,38 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true", 
-                                        "Roboto Mono=11:antialias=true:autohint=true",
-                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
-                                        "JoyPixels:pixelsize=11:antialias=true:autohint=true", 
-                                        "font-awesome:pixelsize=12:antialias=true:autohint=true", 
-                                        "Hermit:pixelsize=12:antialias=true:autohint=true" };
-static char dmenufont[]             =   "Product Sans:size=11";
-// static char normbgcolor[]           = "#222222"; // default
+static const char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true","JoyPixels:pixelsize=11:antialias=true:autohint=true", "font-awesome:pixelsize=12:antialias=true:autohint=true", "Hermit:pixelsize=11:antialias=true:autohint=true" };
+static char dmenufont[]             = "Product Sans:size=11";
+//static char normbgcolor[]           = "#222222"; // default
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#FFFFFF";
-// static char selfgcolor[]            = "#eeeeee"; // default
-// static char selbordercolor[]        = "#d1ac3e"; // gold border
-// static char selbordercolor[]        = "#febca7"; // peach border
-// static char selbordercolor[]        = "#45B3BE"; // Theme Teal
-// static char selbordercolor[]        = "#66e3c6"; // My teal border color
-// static char selbordercolor[]        = "#324c8d"; // My teal border color
-// static char selbordercolor[]        = "#d4aa9d"; // pywal peach
-// static char selbordercolor[]        = "#bd6069"; // nord red 
-static char selbordercolor[]        = "#e9c989"; // nord yellow 
+//static char selfgcolor[]            = "#eeeeee"; // default
+//static char selbordercolor[]        = "#d1ac3e"; // gold border
+static char selbordercolor[]        = "#febca7"; // peach border
+//static char selbordercolor[]        = "#66e3c6"; // My teal border color
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
-// static char selbgcolor[]            = "#7d0202";  // red 
-// static char selbgcolor[]            = "#6b4635";  // brown
-static char selbgcolor[]            = "#575b7f";  // reddit color
-// static char selbgcolor[]            = "#996863";  // pywall brown
+//static char selbgcolor[]            = "#7d0202";  // red 
+static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#027d4c";  // green 
 // static char selbgcolor[]            = "#02107d";  // blue 
 // static char selbgcolor[]            = "#005577";  // default 
-// static char selbgcolor[]            = "#212121";  // gray 
+// static char selbgcolor[]            = "#222222";  // gray 
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, "#000000", normbordercolor },
-//       [SchemeNorm] = { normfgcolor, "#212121", normbordercolor },
+//       [SchemeNorm] = { normfgcolor, "#222222", normbordercolor },
        [SchemeSel]  = { selfgcolor,  "#FFFFFF",  selbordercolor  },
        [SchemeStatus] = { selfgcolor, "#000000", selbordercolor }, // Statusbar right
-//       [SchemeStatus] = { selfgcolor, "#212121", selbordercolor }, // Statusbar right
+//       [SchemeStatus] = { selfgcolor, "#222222", selbordercolor }, // Statusbar right
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
        [SchemeTagsNorm] = { selfgcolor, "#000000", selbordercolor}, // Tagbar left unselected
-//       [SchemeTagsNorm] = { selfgcolor, "#212121", selbordercolor}, // Tagbar left unselected
+//       [SchemeTagsNorm] = { selfgcolor, "#222222", selbordercolor}, // Tagbar left unselected
        [SchemeInfoSel] = { selfgcolor, "#000000", selbordercolor }, // infobar middle selected
-//       [SchemeInfoSel] = { selfgcolor, "#212121", selbordercolor }, // infobar middle selected
+//       [SchemeInfoSel] = { selfgcolor, "#222222", selbordercolor }, // infobar middle selected
        [SchemeInfoNorm] = { selbgcolor, "#000000", selbordercolor }, // infobar middle unselected
-//       [SchemeInfoNorm] = { selbgcolor, "#212121", selbordercolor }, // infobar middle unselected
+//       [SchemeInfoNorm] = { selbgcolor, "#222222", selbordercolor }, // infobar middle unselected
 //       [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
 //       [SchemeTagsNorm] = { selfgcolor, selbgcolor, selbordercolor}, // Tagbar left unselected
 //       [SchemeInfoSel] = { selbgcolor, selbgcolor, selbordercolor }, // infobar middle selected
@@ -71,8 +55,8 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "Hermit:size=11", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spcalc", "-f", "Hermit:size=11", "-g", "50x20", "-e", "bc", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -90,7 +74,6 @@ static const Rule rules[] = {
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,        -1 },
-	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1 },
 	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,        -1 },
 	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,        -1 },
 	{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,        -1 },
@@ -147,7 +130,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
@@ -174,20 +157,22 @@ static Key keys[] = {
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_BackSpace,	quit,		{0} },
+	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sysact") },
+
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	/* { MODKEY|ShiftMask,		XK_c,		killclient,	{0} }, */
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("firefox") },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
-	/* { MODKEY,			XK_e,		spawn,          SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") }, */
-	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e thunderbird") },
-	/* { MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e vim ~/vimwiki/index.wiki") }, */
-	/* { MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e sh ~/.config/gitpush.sh") }, */
-	/* { MODKEY|ShiftMask,		XK_e,		spawn,          SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") }, */
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ytop") },
-	/* { MODKEY,			XK_r,		spawn,          SHCMD(TERMINAL " -e lf") }, */
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("st -e sudo nmtui") },
+	/* { MODKEY,			XK_e,		spawn,          SHCMD("st -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") }, */
+	{ MODKEY,			XK_e,		spawn,		SHCMD("st -e thunderbird") },
+	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("st -e vim ~/vimwiki/index.wiki") },
+	/* { MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("st -e sh ~/.config/gitpush.sh") }, */
+	/* { MODKEY|ShiftMask,		XK_e,		spawn,          SHCMD("st -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") }, */
+	{ MODKEY,			XK_r,		spawn,		SHCMD("st -e ytop") },
+	/* { MODKEY,			XK_r,		spawn,          SHCMD("st -e lf") }, */
+	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD("st -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
@@ -200,19 +185,20 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	/* { MODKEY,			XK_p,			spawn,          SHCMD("mpc toggle") }, */
 	/* { MODKEY|ShiftMask,		XK_p,			spawn,          SHCMD("mpc pause ; pauseallmpv") }, */
-	{ MODKEY|ShiftMask,		XK_p,			spawn,          SHCMD(TERMINAL " -e .config/vifm/scripts/vifmrun") }, 
+	{ MODKEY|ShiftMask,		XK_p,			spawn,          SHCMD("st -e vifm") }, 
 	{ MODKEY,			XK_bracketleft,		spawn,		SHCMD("mocp -k -10") },
 	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mocp -k -60") },
 	{ MODKEY,			XK_bracketright,	spawn,		SHCMD("mocp -k +10") },
-	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mocp -k +60") }, 
-        { MODKEY,			XK_backslash,		view,		{0} },
+	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mocp -k +60") },
+	{ MODKEY,			XK_backslash,		view,		{0} },
 	/* { MODKEY|ShiftMask,		XK_backslash,		spawn,		SHCMD("") }, */
 
 	{ MODKEY,			XK_a,		togglegaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_p,		spawn,          {.v = dmenucmd } },
+	//{ MODKEY,			XK_p,		spawn,          {.v = dmenucmd } },
+	{ MODKEY,			XK_p,		spawn,          SHCMD("dmenu") } },
 	/* { MODKEY,			XK_d,		spawn,		SHCMD("") } }, */
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
@@ -221,7 +207,6 @@ static Key keys[] = {
 	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
-	{ MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
@@ -240,9 +225,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        SHCMD("brave") },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e vim -c VimwikiIndex") },
-	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+6 dwmblocks") },
-	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e mocp") },
+	{ MODKEY,			XK_n,		spawn,		SHCMD("st -e nvim -c VimwikiIndex") },
+	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD("st -e newsboat; pkill -RTMIN+6 dwmblocks") },
+	{ MODKEY,			XK_m,		spawn,		SHCMD("st mocp") },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		SHCMD("mocp -r") },
 	{ MODKEY|ShiftMask,		XK_comma,	spawn,		SHCMD("mocp -j N{%,0}") },
@@ -258,44 +243,20 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
 	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
-	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") },
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw sync") },
-	{ MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") },
-	{ MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") },
-	{ MODKEY,			XK_F11,		spawn,		SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
-	{ MODKEY,			XK_F12,		xrdb,		{.v = NULL } },
-=======
-//	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
-//      { MODKEY,			XK_Page_Up,	spawn,   	SHCMD("maim ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
-	{ MODKEY,			XK_Page_Up,	spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
-//	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
-//	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
-        { MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
-//	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("maim -s ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
-//	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
-	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-	{ MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
-	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
+	/* { MODKEY,			XK_F4,		spawn,          SHCMD("st -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("(instagram-nativefier)") },
-	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
+	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("torbrowser-launcher") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
-	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("caprine") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD(TERMINAL " -e setxkbmap -option caps:escape") },
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("st -e setxkbmap -option caps:escape") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
-	 { MODKEY,			XK_F9,		spawn,		SHCMD(TERMINAL " -e setxkbmap -option caps:backspace && xset r 66") },
+	 { MODKEY,			XK_F9,		spawn,		SHCMD("st -e setxkbmap -option caps:backspace && xset r 66") },
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 //	{ MODKEY,			XK_F10,		spawn,		SHCMD("betterlockscreen -s") },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
@@ -328,19 +289,18 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioPause,		spawn,		SHCMD("mocp -P") }, 
 	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("mocp -G") }, 
 	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mocp -s") },
-	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("mocp seek -10") },
-	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("mocp seek +10") },
-	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
-        { 0, XF86XK_AudioMicMute,       spawn,          SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") },
+	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") },
+	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD("st -e ncmpcpp") },
 	/* { 0, XF86XK_PowerOff,		spawn,		SHCMD("sysact") }, */
-	{ 0, XF86XK_Calculator,		spawn,		SHCMD(TERMINAL " -e bc -l") },
+	{ 0, XF86XK_Calculator,		spawn,		SHCMD("st -e bc -l") },
 	{ 0, XF86XK_Sleep,		spawn,		SHCMD("sudo -A zzz") },
 	{ 0, XF86XK_WWW,		spawn,		SHCMD("$BROWSER") },
-	{ 0, XF86XK_DOS,		spawn,		SHCMD(TERMINAL) },
+	{ 0, XF86XK_DOS,		spawn,		SHCMD("st") },
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
-	{ 0, XF86XK_TaskPane,		spawn,		SHCMD(TERMINAL " -e htop") },
-	{ 0, XF86XK_Mail,		spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
-	{ 0, XF86XK_MyComputer,		spawn,		SHCMD(TERMINAL " -e lf /") },
+	{ 0, XF86XK_TaskPane,		spawn,		SHCMD("st -e htop") },
+	{ 0, XF86XK_Mail,		spawn,		SHCMD("st -e neomutt ; pkill -RTMIN+12 dwmblocks") },
+	{ 0, XF86XK_MyComputer,		spawn,		SHCMD("st -e lf /") },
 	/* { 0, XF86XK_Battery,		spawn,		SHCMD("") }, */
 	{ 0, XF86XK_Launch1,		spawn,		SHCMD("xset dpms force off") },
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
@@ -371,7 +331,6 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-#ifndef __OpenBSD__
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
@@ -379,8 +338,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button4,        sigdwmblocks,   {.i = 4} },
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
-#endif
-	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e vim ~/.local/src/dwmblocks/config.h") },
+	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD("st -e nvim ~/.local/src/dwmblocks/config.h") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

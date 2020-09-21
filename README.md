@@ -1,4 +1,4 @@
-# Luke's build of dwm
+# Modified Version of Luke's build of dwm
 
 ## FAQ
 
