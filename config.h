@@ -19,7 +19,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true", 
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
-                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
+//                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
 //                                        "JoyPixels:pixelsize=11:antialias=true:autohint=true", 
 //                                        "font-awesome:pixelsize=12:antialias=true:autohint=true", 
                                         "Hermit:pixelsize=12:antialias=true:autohint=true" };
@@ -254,11 +254,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
-	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
-	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
-	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+//      { MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
+//      { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
+//      { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
+//      { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
+      { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
 //	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 //      { MODKEY,			XK_Page_Up,	spawn,   	SHCMD("maim ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
