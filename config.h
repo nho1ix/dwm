@@ -280,9 +280,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("caprine") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD(TERMINAL " -e setxkbmap -option caps:escape") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
-	 { MODKEY,			XK_F9,		spawn,		SHCMD(TERMINAL " -e setxkbmap -option caps:backspace && xset r 66") },
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 //	{ MODKEY,			XK_F10,		spawn,		SHCMD("betterlockscreen -s") },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
@@ -298,12 +296,12 @@ static Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
-	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
-	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
-	{ MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
-	{ MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") },
-	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
+//      { 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+//      { ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
+//      { MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
+//      { MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") },
+//      { MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") },
+//      { MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
