@@ -258,7 +258,7 @@ static Key keys[] = {
 //      { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
 //      { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
 //      { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-      { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+        { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
 //	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 //      { MODKEY,			XK_Page_Up,	spawn,   	SHCMD("maim ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
