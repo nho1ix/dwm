@@ -25,6 +25,7 @@ static const char *fonts[]          = { "Product Sans:size=11:antialias=true:aut
                                         "Hermit:pixelsize=12:antialias=true:autohint=true" };
 static char dmenufont[]             =   "Product Sans:size=11";
 // static char normbgcolor[]           = "#222222"; // default
+// static char normbgcolor[]           = "#000000"; // default
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -37,7 +38,8 @@ static char selfgcolor[]            = "#FFFFFF";
 // static char selbordercolor[]        = "#324c8d"; // My teal border color
 // static char selbordercolor[]        = "#d4aa9d"; // pywal peach
 // static char selbordercolor[]        = "#bd6069"; // nord red 
-static char selbordercolor[]        = "#e9c989"; // nord yellow 
+// static char selbordercolor[]        = "#e9c989"; // nord yellow 
+static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
@@ -55,7 +57,7 @@ static char *colors[][3] = {
        [SchemeStatus] = { selfgcolor, "#000000", selbordercolor }, // Statusbar right
 //       [SchemeStatus] = { selfgcolor, "#212121", selbordercolor }, // Statusbar right
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
-       [SchemeTagsNorm] = { selfgcolor, "#000000", selbordercolor}, // Tagbar left unselected
+       [SchemeTagsNorm] = { selfgcolor, "#000000", selbordercolor}, // Tagbar left unselecte
 //       [SchemeTagsNorm] = { selfgcolor, "#212121", selbordercolor}, // Tagbar left unselected
        [SchemeInfoSel] = { selfgcolor, "#000000", selbordercolor }, // infobar middle selected
 //       [SchemeInfoSel] = { selfgcolor, "#212121", selbordercolor }, // infobar middle selected
@@ -89,13 +91,13 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	*/
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,        -1 },
-	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           1,         0,        -1 },
-	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,        -1 },
-	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,        -1 },
-	{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,        -1 },
-	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,        -1 },
-	{ "St",       NULL,       NULL,       	    0,            0,           1,         0,        -1 },
+	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,        0,        -1 },
+	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,        0,        -1 },
+	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,        0,        -1 },
+	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,        0,        -1 },
+	{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,        0,        -1 },
+	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,        0,        -1 },
+	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,        0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
 	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
