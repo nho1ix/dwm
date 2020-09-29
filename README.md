@@ -1,4 +1,5 @@
-# Modified Version of Luke's build of dwm
+<!-- # Modified Version of Luke's build of dwm -->
+### :octocat: Hey there! Thanks for visiting! <img alt="Visits" align="right" src="https://badges.pufler.dev/visits/nho1ix/dotfiles"/> 
 
 ## FAQ
 
