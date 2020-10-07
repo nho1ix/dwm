@@ -295,7 +295,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	/* { MODKEY,			XK_F12,		xrdb,		{.v = NULL } }, */
 	/* { MODKEY,			XK_F12,		spawn,           SHCMD("slock") }, */
-	{ MODKEY,			XK_F12,		spawn,           SHCMD("picom --experimental-backends ") }, 
+	{ MODKEY,			XK_F12,		spawn,           SHCMD("picom --experimental-backends") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
