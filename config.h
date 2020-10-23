@@ -280,7 +280,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
+	{ MODKEY,			XK_F5,		spawn,		SHCMD("lightcord") },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("torbrowser-launcher") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
