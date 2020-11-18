@@ -39,13 +39,13 @@ static char selfgcolor[]            = "#FFFFFF";
 // static char selbordercolor[]        = "#d4aa9d"; // pywal peach
 // static char selbordercolor[]        = "#bd6069"; // nord red 
 // static char selbordercolor[]        = "#e9c989"; // nord yellow 
-static char selbordercolor[]            = "#88b3cd";  // tianshu green
+static char selbordercolor[]            = "#88b3cd";  // tianshu green border
 // static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
-static char selbgcolor[]            = "#57707f";  // reddit color (green shift hue)
+static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
 // static char selbgcolor[]            = "#c58f8d";  // pywal peach
 // static char selbgcolor[]            = "#996863";  // pywal brown
 // static char selbgcolor[]            = "#027d4c";  // green 
@@ -86,7 +86,7 @@ static Sp scratchpads[] = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
-static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
