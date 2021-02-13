@@ -20,10 +20,12 @@ static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
+//                                        "JetBrainsMonoNL-Bold:size=9:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
 //                                        "JoyPixels:pixelsize=11:antialias=true:autohint=true", 
 //                                        "font-awesome:pixelsize=12:antialias=true:autohint=true", 
-                                        "Hermit:pixelsize=12:antialias=true:autohint=true" };
+//                                        "Hermit:pixelsize=12:antialias=true:autohint=true" 
+                                        };
 // static char normbgcolor[]           = "#222222"; // default
 // static char normbgcolor[]           = "#000000"; // default
 static char normbgcolor[]           = "#000000"; // default
@@ -304,6 +306,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
 //      { MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
+//      { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
 //      { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
