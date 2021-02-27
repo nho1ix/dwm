@@ -41,19 +41,19 @@ static char selfgcolor[]            = "#FFFFFF";
 // static char selbordercolor[]        = "#d4aa9d"; // pywal peach
 // static char selbordercolor[]        = "#bd6069"; // nord red 
 // static char selbordercolor[]        = "#e9c989"; // nord yellow 
-// static char selbordercolor[]            = "#88b3cd";  // tianshu green border
-static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
+static char selbordercolor[]            = "#5dd386";  // tianshu green border
+//static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 // static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
-// static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
-static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
+//static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
+//static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
 // static char selbgcolor[]            = "#c58f8d";  // pywal peach
 // static char selbgcolor[]            = "#996863";  // pywal brown
-// static char selbgcolor[]            = "#027d4c";  // green 
-// static char selbgcolor[]            = "#02107d";  // blue 
+//static char selbgcolor[]            = "#027d4c";  // green 
+static char selbgcolor[]            = "#2b583b";  // green 
 // static char selbgcolor[]            = "#005577";  // default 
 // static char selbgcolor[]            = "#212121";  // gray 
 static char *colors[][3] = {
@@ -114,7 +114,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
-static int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 static const Layout layouts[] = {
@@ -288,11 +288,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-//      { MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
-//      { MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
-//      { MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
-//      { MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
-        { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(cat ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
+	{ MODKEY|ShiftMask,		XK_Page_Up,	shifttag,	{ .i = -1 } },
+	{ MODKEY,			XK_Page_Down,	shiftview,	{ .i = +1 } },
+	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
+	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
 //	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 //      { MODKEY,			XK_Page_Up,	spawn,   	SHCMD("maim ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
@@ -372,13 +372,6 @@ static Key keys[] = {
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 2 && sh ~/.config/scripts/xbacklight.sh") },
 
 	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } }, */
-	/* { MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } }, */
-	/* { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} }, */
-	/* { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } }, */
 	/* { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } }, */
 	/* { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } }, */
 	/* { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } }, */
