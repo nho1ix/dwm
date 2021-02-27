@@ -170,6 +170,8 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 \f(CWMod+Shift+Enter\fP \(en Show/hide dropdown terminal
 .ITEM
 \f(CWMod+'\fP \(en Show/hide dropdown calculator
+.ITEM
+\f(CWMod+D\fP \(en passmenu (password manager)
 .LIST OFF
 .HEADING 2 "System"
 .LI
@@ -196,7 +198,7 @@ To type capital letters, hold down the \f(CWShift\fP key\(emthat might sound lik
 .ITEM
 \f(CWMod+F11\fP \(en View webcam
 .ITEM
-\f(CWMod+F12\fP \(en Update dwm's colorscheme if you have changed Xresources
+\f(CWMod+F12\fP \(en Rerun kayboard mapping scripts if new keyboard is attached
 .ITEM
 \f(CWMod+`\fP \(en Select an emoji to copy to clipboard
 .ITEM
@@ -330,7 +332,9 @@ LARBS is deployed as a git repository in your home directory.
 You can use it as such to fetch, diff and merge changes from the remote repository.
 If you don't want to do that or don't know how to use git, you can actually just rerun the script (as root) and reinstall LARBS and it will automatically update an existing install if you select the same username.
 This will overwrite the original config files though, including changes you made for them, but this is an easier brute force approach that will also install any new dependencies.
-.HEADING 1 "Contact"
+.HEADING 1 "Important Links"
+.PP
+You can follow links via the keyboard in this pdf reader by pressing \f(CWf\fP followed by the number that appears on the desired link.
 .LI
 .ITEM
 .PDF_WWW_LINK "mailto:luke@lukesmith.xyz" "luke@lukesmith.xyz"
