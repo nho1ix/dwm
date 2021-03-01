@@ -18,7 +18,7 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
+static char *fonts[]          = { "Product Sans:size=13:antialias=true:autohint=true",
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
 //                                        "JoyPixels:pixelsize=11:antialias=true:autohint=true", 
@@ -45,7 +45,8 @@ static char selbordercolor[]            = "#88b3cd";  // tianshu green
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
-static char selbgcolor[]            = "#57707f";  // reddit color (green shift hue)
+//static char selbgcolor[]            = "#57707f";  // reddit color (green shift hue)
+static char selbgcolor[]            = "#ba6c91";  // blossom pink
 // static char selbgcolor[]            = "#c58f8d";  // pywal peach
 // static char selbgcolor[]            = "#996863";  // pywal brown
 // static char selbgcolor[]            = "#027d4c";  // green 
@@ -361,8 +362,8 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 2 && sh ~/.config/scripts/xbacklight.sh") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 2 && sh ~/.config/scripts/xbacklight.sh") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("light -A 2 && sh ~/.config/scripts/xbacklight.sh") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("light -U 2 && sh ~/.config/scripts/xbacklight.sh") },
 
 	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
 	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
