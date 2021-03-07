@@ -90,7 +90,7 @@ static Sp scratchpads[] = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
-static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
 // Firefox Icon: 
 
 static const Rule rules[] = {
@@ -103,7 +103,7 @@ static const Rule rules[] = {
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,         0,        -1 },
 	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,         0,        -1 },
-	{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,         0,        -1 },
+	//{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
@@ -301,9 +301,10 @@ static Key keys[] = {
 //      { MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-//      { MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
-//      { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
-//      { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
+        { MODKEY,			XK_F2,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+//        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
+        { MODKEY,			XK_F3,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
+//        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
@@ -325,7 +326,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	/* { MODKEY,			XK_F12,		xrdb,		{.v = NULL } }, */
 	/* { MODKEY,			XK_F12,		spawn,           SHCMD("slock") }, */
-	{ MODKEY,			XK_F12,		spawn,           SHCMD("picom --experimental-backends") }, 
+	{ MODKEY,			XK_F12,		spawn,           SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
@@ -348,8 +349,7 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mocp -s") },
 	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("mocp seek -10") },
 	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("mocp seek +10") },
-	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
-        { 0, XF86XK_AudioMicMute,       spawn,          SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") }, { 0, XF86XK_AudioMicMute,       spawn,          SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	/* { 0, XF86XK_PowerOff,		spawn,		SHCMD("sysact") }, */
 	{ 0, XF86XK_Calculator,		spawn,		SHCMD(TERMINAL " -e bc -l") },
 	{ 0, XF86XK_Sleep,		spawn,		SHCMD("sudo -A zzz") },
