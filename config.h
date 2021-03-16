@@ -18,7 +18,10 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
+static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
+static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
+static const char *altbarcmd        = "$HOME/.config/polybar/launch.s"; /* Alternate bar launch command */
+static char *fonts[]          = { "Product Sans:size=13:antialias=true:autohint=true",
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
 //                                        "JetBrainsMonoNL-Bold:size=9:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
@@ -41,19 +44,19 @@ static char selfgcolor[]            = "#FFFFFF";
 // static char selbordercolor[]        = "#d4aa9d"; // pywal peach
 // static char selbordercolor[]        = "#bd6069"; // nord red 
 // static char selbordercolor[]        = "#e9c989"; // nord yellow 
-static char selbordercolor[]            = "#5dd386";  // tianshu green border
-//static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
+//static char selbordercolor[]            = "#5dd386";  // tianshu green border
+static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 // static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
 //static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
-//static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
 // static char selbgcolor[]            = "#c58f8d";  // pywal peach
 // static char selbgcolor[]            = "#996863";  // pywal brown
 //static char selbgcolor[]            = "#027d4c";  // green 
-static char selbgcolor[]            = "#2b583b";  // green 
+//static char selbgcolor[]            = "#2b583b";  // valentyn
 // static char selbgcolor[]            = "#005577";  // default 
 // static char selbgcolor[]            = "#212121";  // gray 
 static char *colors[][3] = {
@@ -405,3 +408,22 @@ static Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 };
+
+static const char *ipcsockpath = "/tmp/dwm.sock";
+static IPCCommand ipccommands[] = {
+  IPCCOMMAND(  view,                1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggleview,          1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tag,                 1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggletag,           1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tagmon,              1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  focusmon,            1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  focusstack,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  zoom,                1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
+  IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
+  IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   )
+};
+
