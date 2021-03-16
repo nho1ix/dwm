@@ -301,9 +301,9 @@ static Key keys[] = {
 //      { MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-        { MODKEY,			XK_F2,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+        { MODKEY,			XK_F2,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
-        { MODKEY,			XK_F3,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
+        { MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
@@ -317,7 +317,8 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 //	{ MODKEY,			XK_F10,		spawn,		SHCMD("betterlockscreen -s") },
-	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
+	/* { MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") }, */
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend") },
 	/* { MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") }, */
 	/* { MODKEY,			XK_F11,		spawn,
         ** SHCMD("mpv --no-cache --no-osc --no-input-default-bindings
