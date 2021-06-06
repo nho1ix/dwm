@@ -21,7 +21,7 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.s"; /* Alternate bar launch command */
-static char *fonts[]          = { "Product Sans:size=13:antialias=true:autohint=true",
+static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
 //                                        "JetBrainsMonoNL-Bold:size=9:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
@@ -308,7 +308,7 @@ static Key keys[] = {
 //        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
         { MODKEY,			XK_F3,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
-	{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
+	//{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
