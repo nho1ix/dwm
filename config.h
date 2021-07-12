@@ -41,19 +41,18 @@ static char selfgcolor[]            = "#FFFFFF";
 // static char selbordercolor[]        = "#d4aa9d"; // pywal peach
 // static char selbordercolor[]        = "#bd6069"; // nord red 
 // static char selbordercolor[]        = "#e9c989"; // nord yellow 
-static char selbordercolor[]            = "#5dd386";  // tianshu green border
-//static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
-// static char selbordercolor[]        = "#88c0d0"; // nord blue
+//static char selbordercolor[]            = "#5dd386";  // tianshu green border
+static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
+//static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
 // static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
 //static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
-//static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
 // static char selbgcolor[]            = "#c58f8d";  // pywal peach
 // static char selbgcolor[]            = "#996863";  // pywal brown
 //static char selbgcolor[]            = "#027d4c";  // green 
-static char selbgcolor[]            = "#2b583b";  // green 
 // static char selbgcolor[]            = "#005577";  // default 
 // static char selbgcolor[]            = "#212121";  // gray 
 static char *colors[][3] = {
@@ -90,8 +89,9 @@ static Sp scratchpads[] = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
-static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
 // Firefox Icon: 
+// Terminal Icon: 
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -309,7 +309,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,			XK_F5,		spawn,		SHCMD("lightcord") },
+	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("tor-browser") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
