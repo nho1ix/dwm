@@ -21,7 +21,7 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.s"; /* Alternate bar launch command */
-static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
+static char *fonts[]          = { "Product Sans:size=13:antialias=true:autohint=true",
 //                                        "Roboto Mono=11:antialias=true:autohint=true",
 //                                        "JetBrainsMonoNL-Bold:size=9:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
@@ -93,7 +93,7 @@ static Sp scratchpads[] = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
-static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
 // Firefox Icon: 
 
 static const Rule rules[] = {
@@ -304,9 +304,9 @@ static Key keys[] = {
 //      { MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-        { MODKEY,			XK_F2,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+        { MODKEY,			XK_F2,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
-        { MODKEY,			XK_F3,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
+        { MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	//{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
