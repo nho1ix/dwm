@@ -312,13 +312,16 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
-	{ MODKEY,			XK_F5,		spawn,		SHCMD("lightcord") },
+	/* { MODKEY,			XK_F5,		spawn,		SHCMD("lightcord") }, */
+	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("tor-browser") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("caprine") },
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("telegram-desktop") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains_Pos.png &") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
+	{ MODKEY,			XK_F9,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg &") }, 
 //	{ MODKEY,			XK_F10,		spawn,		SHCMD("betterlockscreen -s") },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
 	/* { MODKEY,			XK_F10,		spawn,		SHCMD("dmenuumount") }, */
