@@ -277,7 +277,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        SHCMD("brave") },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e vim -c VimwikiIndex") },
+	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e nvim -c VimwikiIndex") },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e mocp") },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
@@ -318,7 +318,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("telegram-desktop") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains_Pos.png &") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains_Posc.png &") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg &") }, 
