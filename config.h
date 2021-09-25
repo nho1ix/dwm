@@ -23,7 +23,7 @@ static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=
 //                                        "JetBrainsMonoNL-Bold:size=9:antialias=true:autohint=true",
 //                                        "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true",
 //                                        "JoyPixels:pixelsize=11:antialias=true:autohint=true", 
-//                                        "font-awesome:pixelsize=12:antialias=true:autohint=true", 
+                                        "JetBrainsMono Nerd Font:style=medium:pixelsize=12"
 //                                        "Hermit:pixelsize=12:antialias=true:autohint=true" 
                                         };
 // static char normbgcolor[]           = "#222222"; // default
@@ -89,7 +89,7 @@ static Sp scratchpads[] = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
-static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
+static const char *tags[] = { " ", " ", " ", "  ", " ", " ", " ", " ", " " };
 // Firefox Icon: 
 // Terminal Icon: 
 
@@ -101,7 +101,7 @@ static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,         0,        -1 },
+	/* { "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,         0,        -1 }, */
 	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,         0,        -1 },
 	//{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
