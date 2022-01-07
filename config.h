@@ -104,7 +104,7 @@ static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,         0,        -1 },
+	/* { "firefox",  NULL,       NULL,       	    1 << 1,       0,           0,         0,         0,        -1 }, */
 	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,         0,        -1 },
 	//{ "Brave",    NULL,       NULL,       	    1 << 3,       0,           0,         0,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
@@ -318,7 +318,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("telegram-desktop") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains_Posc.png &") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png &") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg &") }, 
