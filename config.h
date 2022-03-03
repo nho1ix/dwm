@@ -111,6 +111,7 @@ static const Rule rules[] = {
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
+	{ NULL,      "bg",        NULL,       	    0,            0,           1,    1 << 7,        -1 },
 	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
 };
 
@@ -307,7 +308,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
         { MODKEY,			XK_F2,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
-        { MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+        { MODKEY,			XK_F3,		spawn,		SHCMD("sct 5500 && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	//{ MODKEY,			XK_F3,		spawn,          SHCMD("signal-desktop-beta") },
 	/* { MODKEY,			XK_F4,		spawn,          SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
