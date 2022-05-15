@@ -18,7 +18,7 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-//static int usealtbar          = 1;        /* 1 means use non-dwm status bar */
+//static int usealtbar          = 0;        /* 1 means use non-dwm status bar */
 //static char *altbarclass      = "Polybar"; /* Alternate bar class name */
 //static char *altbarcmd        = "$HOME/.config/polybar/launch.sh"; /* Alternate bar launch command */
 static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true",
@@ -48,7 +48,7 @@ static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 //static char selbordercolor[]        = "#88c0d0"; // nord blue
 // static char selbordercolor[]        = "#770000"; // Luke Smith's red border color
-// static char selbgcolor[]            = "#7d0202";  // red 
+//static char selbgcolor[]            = "#7d0202";  // red 
 // static char selbgcolor[]            = "#6b4635";  // brown
 // static char selbgcolor[]            = "#575b7f";  // reddit color
 //static char selbgcolor[]            = "#57707f";  // tianshu green (also reddit color with green shift hue)
@@ -292,7 +292,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	// { MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
 //	{ MODKEY,			XK_Page_Up,	shiftview,	{ .i = -1 } },
 //      { MODKEY,			XK_Page_Up,	spawn,   	SHCMD("maim ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
@@ -303,9 +303,11 @@ static Key keys[] = {
 //	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("maim -s ~/Pictures/Screenshots/Temporary/$(date +%m%d%y-%I:%M%p).png") },
 //	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
 //      { MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
-	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-        { MODKEY,			XK_F2,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh") },
+	// { MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \" Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
+	{ MODKEY,			XK_Insert,	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
+	/* { MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") }, */
+	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
+        { MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F2,		spawn,		SHCMD("spotify") },
         { MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 //        { MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
@@ -314,10 +316,12 @@ static Key keys[] = {
 	{ MODKEY,			XK_F4,		spawn,          SHCMD("instagram-nativefier") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
 	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("tor-browser") },
+	/* { MODKEY,			XK_F6,		spawn,		SHCMD("tor-browser") }, */
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/gradient.png") },
 	/* { MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") }, */
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") }, */
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("caprine") },
+	/* { MODKEY,			XK_F7,		spawn,		SHCMD("caprine") }, */
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("telegram-desktop") },
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
