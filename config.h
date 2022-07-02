@@ -323,7 +323,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_F7,		spawn,		SHCMD("caprine") }, */
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
 	/* { MODKEY,			XK_F8,		spawn,		SHCMD("mailsync") }, */
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("telegram-desktop") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
 	/* { MODKEY,			XK_F9,		spawn,		SHCMD("dmenumount") }, */
 //	{ MODKEY,			XK_F10,		spawn,		SHCMD("betterlockscreen -s") },
 	/* { MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") }, */
