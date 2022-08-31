@@ -52,3 +52,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 aur
+
+# dwm exec files
+dwm
+dwm-msg
