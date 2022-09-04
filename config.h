@@ -3,7 +3,7 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "librewolf"
+#define BROWSER "chromium"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -114,12 +114,12 @@ static const char *termcmd[]  = { TERMINAL, NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "color0",		STRING,	&normbordercolor },
-		{ "color8",		STRING,	&selbordercolor },
-		{ "color0",		STRING,	&normbgcolor },
-		{ "color4",		STRING,	&normfgcolor },
-		{ "color0",		STRING,	&selfgcolor },
-		{ "color4",		STRING,	&selbgcolor },
+		// { "color0",		STRING,	&normbordercolor },
+		// { "color8",		STRING,	&selbordercolor },
+		// { "color0",		STRING,	&normbgcolor },
+		// { "color4",		STRING,	&normfgcolor },
+		// { "color0",		STRING,	&selfgcolor },
+		// { "color4",		STRING,	&selbgcolor },
 		{ "borderpx",		INTEGER, &borderpx },
 		{ "snap",		INTEGER, &snap },
 		{ "showbar",		INTEGER, &showbar },
@@ -161,7 +161,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	quit,		{0} },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
-	{ MODKEY,			XK_w,		spawn,		SHCMD("firefox") },
+	{ MODKEY,			XK_w,		spawn,		SHCMD("chromium") },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e thunderbird") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ytop") },
@@ -206,7 +206,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("chromium") }, 
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("firefox") }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        SHCMD("brave") },
@@ -224,20 +224,21 @@ static Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY,			XK_Page_Up,	spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
+	{ MODKEY,			XK_Page_Up,	  spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
   { MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
-	{ MODKEY,			XK_Insert,	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
+	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
+	{ MODKEY,			XK_End,	      spawn,		SHCMD("killall xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
-	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts.sct.sh") },
+	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
+	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "sct", "3000", "&&", "sh", "~/.config/scripts.sct.sh", NULL } } },
 	{ MODKEY,			XK_F4,		spawn,    SHCMD("instagram-nativefier") },
-	{ MODKEY,			XK_F5,		spawn,		SHCMD("discord") },
+	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg &") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png &") },
 	{ MODKEY,			XK_F8,		spawn,    SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("tor-browser") }, 
-	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
+	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,    SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
