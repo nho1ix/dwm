@@ -221,6 +221,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_Page_Up,	  spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
 	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
 	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
+	{ MODKEY,			XK_End,	  spawn,		SHCMD("killall xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
