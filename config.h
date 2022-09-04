@@ -19,7 +19,7 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static const char *altbarcmd        = "$HOME/.config/polybar/launch.s"; /* Alternate bar launch command */
-static char *fonts[]          = { "Product Sans:size=11:antialias=true:autohint=true", 
+static char *fonts[]          = { "Product Sans:size=15:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 
 static char normbgcolor[]           = "#000000"; // default
