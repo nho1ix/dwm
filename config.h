@@ -136,7 +136,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	{ MODKEY,			XK_grave,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("sh ~/.local/bin/dmenuunicode") },
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
 	TAGKEYS(			XK_3,		2)
@@ -292,4 +292,3 @@ static Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 };
-
