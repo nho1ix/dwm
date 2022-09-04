@@ -3,7 +3,7 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "librewolf"
+#define BROWSER "chromium"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
