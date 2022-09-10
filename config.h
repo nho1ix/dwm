@@ -17,7 +17,7 @@ static int smartgaps          = 0;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char *fonts[]          = { "Product Sans:size=14:antialias=true:autohint=true", 
-                                  "JetBrainsMono Nerd Font Mono:style=Regular:pixelsize=12" };
+                                  "JetBrainsMono Nerd Font:style=Regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -230,9 +230,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "Discord", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
-	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
-	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("spotify") },
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo zzz && slock") },
+	{ MODKEY,			XK_F11,		spawn,		SHCMD("pkill -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
