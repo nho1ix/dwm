@@ -224,8 +224,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_End,	      spawn,		SHCMD("killall xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
-	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
-	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "sct", "3000", "&&", "sh", "~/.config/scripts.sct.sh", NULL } } },
+	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("instagram-nativefier") },
 	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg") },
