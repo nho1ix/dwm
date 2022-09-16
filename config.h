@@ -230,7 +230,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("spotify") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("picom") }, 
