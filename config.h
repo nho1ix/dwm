@@ -16,8 +16,8 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "Product Sans:size=12:antialias=true:autohint=true", 
-                                  "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
+static char *fonts[]          = { "Product Sans:size=14:antialias=true:autohint=true",
+                                  "JetBrainsMono Nerd Font Mono:size=15:antialias=true:autohint=true:style=Regular"};
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -136,7 +136,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	{ MODKEY,			XK_grave,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("sh ~/.local/bin/dmenuunicode") },
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
 	TAGKEYS(			XK_3,		2)
@@ -220,14 +220,14 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_Page_Up,	  spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
 	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
-	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
-	{ MODKEY,			XK_End,	  spawn,		SHCMD("killall xinit") },
+	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("xdotool type $(grep -v '^#' ~/.local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
+	{ MODKEY,			XK_End,	      spawn,		SHCMD("killall xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "sct", "3000", "&&", "sh", "~/.config/scripts.sct.sh", NULL } } },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("instagram-nativefier") },
-	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
+	{ MODKEY,  		XK_F5,		spawn,		SHCMD(TERMINAL " -e gord") },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
@@ -261,8 +261,8 @@ static Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,   	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,      	spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,	      	spawn,		SHCMD("synclient TouchpadOff=0") },
-	{ 0, XF86XK_MonBrightnessUp,  	spawn,		SHCMD("xbacklight -inc 2 && sh ~/.config/scripts/xbacklight.sh") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 2 && sh ~/.config/scripts/xbacklight.sh") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("light -A 2 && sh ~/.config/scripts/xbacklight.sh") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("light -U 2 && sh ~/.config/scripts/xbacklight.sh") },
 };
 
 /* button definitions */
@@ -292,4 +292,3 @@ static Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 };
-
