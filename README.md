@@ -1,5 +1,5 @@
 <!-- # Modified Version of Luke's build of dwm -->
-### :octocat: Hey there! Thanks for visiting! <img alt="Visits" align="right" src="https://badges.pufler.dev/visits/nho1ix/dwm"/> 
+### :octocat: Hey there! Thanks for visiting! <a href="https://hits.seeyoufarm.com"><img alt="visits" align="right" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fnho1ix%2Fdwm&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 
 ## FAQ
 
