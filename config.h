@@ -20,7 +20,7 @@ static char *fonts[]          = { "Product Sans:size=14:antialias=true:autohint=
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
+static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
