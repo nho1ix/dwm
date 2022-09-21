@@ -991,6 +991,43 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	return ret;
 }
 
+int
+status2dtextlength(char* stext)
+{
+	int i, w, len;
+	short isCode = 0;
+	char *text;
+
+	len = strlen(stext) + 1;
+	if (!(text = (char*) malloc(sizeof(char)*len)))
+		die("malloc");
+
+	memcpy(text, stext, len);
+
+	/* compute width of the status text */
+	w = 0;
+	i = -1;
+	while (text[++i]) {
+		if (text[i] == '^') {
+			if (!isCode) {
+				isCode = 1;
+				text[i] = '\0';
+				w += TEXTW(text) - lrpad;
+				text[i] = '^';
+				if (text[++i] == 'f')
+					w += atoi(text + ++i);
+			} else {
+				isCode = 0;
+				text = text + i + 1;
+				i = -1;
+			}
+		}
+	}
+	if (!isCode)
+		w += TEXTW(text) - lrpad;
+	return w;
+}
+
 void
 drawbar(Monitor *m)
 {
