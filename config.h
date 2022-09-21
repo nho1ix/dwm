@@ -59,7 +59,6 @@ static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "Chromium", NULL,       NULL,       	    1 << 2,       0,           0,         0,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
@@ -238,7 +237,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png &") },
 	{ MODKEY,			XK_F8,		spawn,    SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("tor-browser") }, 
-	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,    SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
