@@ -20,7 +20,7 @@ static char *fonts[]          = { "Product Sans:size=14:antialias=true:autohint=
                                   "JetBrainsMono Nerd Font:style=Regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
+static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
@@ -132,7 +132,7 @@ ResourcePref resources[] = {
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
 
-static Key keys[] = {
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
@@ -224,12 +224,12 @@ static Key keys[] = {
 	{ MODKEY,			XK_End,	      spawn,		SHCMD("pkill xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
-	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
-	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "sct", "3000", "&&", "sh", "~/.config/scripts.sct.sh", NULL } } },
+	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("instagram-nativefier") },
 	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "Discord", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg") },
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png") },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg") },
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png") },
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("spotify") },
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo zzz && slock") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("pkill -9 dwmblocks && dwmblocks") },
@@ -267,7 +267,7 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 #ifndef __OpenBSD__
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
