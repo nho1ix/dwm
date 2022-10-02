@@ -287,6 +287,7 @@ static void updatebars(void);
 static void updateclientlist(void);
 static int updategeom(void);
 static void updatenumlockmask(void);
+static void updatesizehints(Client *c);
 static void updatestatus(void);
 static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
@@ -434,6 +435,8 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 	if (*w < bh)
 		*w = bh;
 	if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
+		if (!c->hintsvalid)
+			updatesizehints(c);
 		/* see last two sentences in ICCCM 4.1.2.3 */
 		baseismin = c->basew == c->minw && c->baseh == c->minh;
 		if (!baseismin) { /* temporarily remove base dimensions */
@@ -1003,7 +1006,6 @@ drawbar(Monitor *m)
   if (!m->showbar)
     return;
 
-
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		tw = m->ww - drawstatusbar(m, bh, stext);
@@ -1396,6 +1398,7 @@ manage(Window w, XWindowAttributes *wa)
 	XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
 	configure(c); /* propagates border_width, if size doesn't change */
 	updatewindowtype(c);
+  updatesizehints(c);
 	updatewmhints(c);
 	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
 	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
@@ -2460,6 +2463,7 @@ updatesizehints(Client *c)
 	} else
 		c->maxa = c->mina = 0.0;
 	c->isfixed = (c->maxw && c->maxh && c->maxw == c->minw && c->maxh == c->minh);
+  c->hintsvalid =1;
 }
 
 void
