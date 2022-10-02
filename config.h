@@ -24,7 +24,7 @@ static char *fonts[]          = { "Product Sans:size=15:antialias=true:autohint=
 
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
+static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
@@ -137,7 +137,7 @@ ResourcePref resources[] = {
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
 
-static Key keys[] = {
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
@@ -224,28 +224,28 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
 	{ MODKEY,			XK_Page_Up,	  spawn,   	SHCMD("xfce4-screenshooter -f -s ~/Pictures/Screenshots/Temporary") },
-  { MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
+	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("xfce4-screenshooter -r -s ~/Pictures/Screenshots/Temporary") },
 	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	      spawn,		SHCMD("killall xinit") },
 
 	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
-	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sct", "4500", "&&", "sh", "~/.config/scripts/sct.sh", NULL } } },
-	{ MODKEY,			XK_F3,		spawn,		{.v = (const char*[]){ "sct", "3000", "&&", "sh", "~/.config/scripts.sct.sh", NULL } } },
-	{ MODKEY,			XK_F4,		spawn,    SHCMD("instagram-nativefier") },
+	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F4,		spawn,		SHCMD("instagram-nativefier") },
 	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/cloudy_mountains.jpg &") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/Pictures/Wallpapers/latest.png &") },
-	{ MODKEY,			XK_F8,		spawn,    SHCMD("LD_PRELOAD=/usr/lib/spotify-adblock.so spotify") },
+	{ MODKEY,			XK_F8,		spawn,    SHCMD("spotify") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("tor-browser") }, 
 	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
-	{ MODKEY,			XK_F12,		spawn,    SHCMD("picom") }, 
+	{ MODKEY,			XK_F12,		spawn,		SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	{ 0, XF86XK_AudioMute,		      spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,	  spawn,		SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioLowerVolume,	  spawn,		SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") }, 
+	{ 0, XF86XK_AudioRaiseVolume,		      spawn,		SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,		      spawn,		SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") }, 
 	{ 0, XF86XK_AudioPrev,		      spawn,		SHCMD("mocp -r") },
 	{ 0, XF86XK_AudioNext,		      spawn,		SHCMD("mocp -f") },
 	{ 0, XF86XK_AudioPause,		      spawn,		SHCMD("mocp -P") },
@@ -273,7 +273,7 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 #ifndef __OpenBSD__
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
