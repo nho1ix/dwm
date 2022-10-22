@@ -26,13 +26,13 @@ static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, "#000000", normbordercolor },
-       [SchemeSel]  = { selfgcolor,  "#FFFFFF",  selbordercolor  },
-       [SchemeStatus] = { selfgcolor, "#000000", selbordercolor }, // Statusbar right
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  normfgcolor,  selbordercolor  },
+       [SchemeStatus] = { selfgcolor, normbgcolor, selbordercolor }, // Statusbar right
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
-       [SchemeTagsNorm] = { selfgcolor, "#000000", selbordercolor}, // Tagbar left unselecte
-       [SchemeInfoSel] = { selfgcolor, "#000000", selbordercolor }, // infobar middle selected
-       [SchemeInfoNorm] = { selbgcolor, "#000000", selbordercolor }, // infobar middle unselected
+       [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor}, // Tagbar left unselecte
+       [SchemeInfoSel] = { selfgcolor, normbgcolor, selbordercolor }, // infobar middle selected
+       [SchemeInfoNorm] = { selbgcolor, normbgcolor, selbordercolor }, // infobar middle unselected
 };
 
 typedef struct {
