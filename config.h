@@ -16,14 +16,15 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static int usealtbar          = 0;        /* 1 means use non-dwm status bar */
-static char *altbarclass      = "Polybar"; /* Alternate bar class name */
-static char *altbarcmd        = "$HOME/.config/polybar/blocks/launch.sh"; /* Alternate bar launch command */
-static char *fonts[]          = { "Product Sans:size=14:antialias=true:autohint=true", 
+static const int usealtbar          = 0;        /* 1 means use non-dwm status bar */
+static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
+static const char *altbarcmd        = "$HOME/.config/polybar/launch.s"; /* Alternate bar launch command */
+static char *fonts[]          = { "Product Sans:size=15:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
+
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
+static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
 static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
@@ -51,7 +52,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { " ", " ", " ", "  ", " ", " ", " ", " ", " " };
+/* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"}; */
+static const char *tags[] = { "", "", "", " ", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
@@ -135,7 +137,7 @@ ResourcePref resources[] = {
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
 
-static Key keys[] = {
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
@@ -234,7 +236,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png") },
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("spotify") },
-	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
+	{ MODKEY,			XK_F9,		spawn,		SHCMD("tor-browser") }, 
+	{ MODKEY,			XK_F10,		spawn,		SHCMD("sudo systemctl suspend && slock") },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("picom") }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
@@ -248,29 +251,29 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioPause,		      spawn,		SHCMD("mocp -P") },
 	{ 0, XF86XK_AudioPlay,		      spawn,		SHCMD("mocp -G") },
 	{ 0, XF86XK_AudioStop,		      spawn,		SHCMD("mocp -s") },
-	{ 0, XF86XK_AudioRewind,	      spawn,		SHCMD("mocp seek -10") },
-	{ 0, XF86XK_AudioForward,	      spawn,		SHCMD("mocp seek +10") },
-	{ 0, XF86XK_AudioMedia,		      spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
+	{ 0, XF86XK_AudioRewind,	      spawn,		SHCMD("mocp -10") },
+	{ 0, XF86XK_AudioForward,	      spawn,		SHCMD("mocp +10") },
+	{ 0, XF86XK_AudioMedia,		      spawn,		SHCMD(TERMINAL " -e mocp") },
 	{ 0, XF86XK_AudioMicMute,	      spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	{ 0, XF86XK_Calculator,		      spawn,		SHCMD(TERMINAL " -e bc -l") },
-	{ 0, XF86XK_Sleep,	           	spawn,		SHCMD("sudo -A zzz") },
+	{ 0, XF86XK_Sleep,	    	      spawn,		{.v = (const char*[]){ "sudo", "-A", "zzz", NULL } } },
 	{ 0, XF86XK_WWW,		            spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
 	{ 0, XF86XK_DOS,		            spawn,		{.v = termcmd } },
 	{ 0, XF86XK_ScreenSaver,	      spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
-	{ 0, XF86XK_TaskPane,		        spawn,		SHCMD(TERMINAL " -e htop") },
+	{ 0, XF86XK_TaskPane, 		      spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 	{ 0, XF86XK_Mail,		            spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
-	{ 0, XF86XK_MyComputer,		      spawn,		SHCMD(TERMINAL " -e lfub /") },
-	{ 0, XF86XK_Launch1,		        spawn,		SHCMD("xset dpms force off") },
-	{ 0, XF86XK_TouchpadToggle,   	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
-	{ 0, XF86XK_TouchpadOff,      	spawn,		SHCMD("synclient TouchpadOff=1") },
-	{ 0, XF86XK_TouchpadOn,	      	spawn,		SHCMD("synclient TouchpadOff=0") },
-	{ 0, XF86XK_MonBrightnessUp,  	spawn,		SHCMD("xbacklight -inc 2 && sh ~/.config/scripts/xbacklight.sh") },
+	{ 0, XF86XK_MyComputer,		      spawn,		SHCMD(TERMINAL " -e lfub") },
+	{ 0, XF86XK_Launch1,		        spawn,		{.v = (const char*[]){ "xset", "dpms", "force", "off", NULL } } },
+	{ 0, XF86XK_TouchpadToggle, 	  spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
+	{ 0, XF86XK_TouchpadOff,	      spawn,		SHCMD("synclient TouchpadOff=1") },
+	{ 0, XF86XK_TouchpadOn,		      spawn,		SHCMD("synclient TouchpadOff=0") },
+	{ 0, XF86XK_MonBrightnessUp,	  spawn,		SHCMD("xbacklight -inc 2 && sh ~/.config/scripts/xbacklight.sh") },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 2 && sh ~/.config/scripts/xbacklight.sh") },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 #ifndef __OpenBSD__
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },

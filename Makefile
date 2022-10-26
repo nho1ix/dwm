@@ -22,8 +22,11 @@ ${OBJ}: config.h config.mk
 dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
+dwm-msg: dwm-msg.o
+	${CC} -o $@ $< ${LDFLAGS}
+
 clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz *.orig *.rej
+	rm -f dwm dwm-msg ${OBJ} dwm-${VERSION}.tar.gz *.orig *.rej
 
 dist: clean
 	mkdir -p dwm-${VERSION}
