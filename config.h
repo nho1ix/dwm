@@ -16,6 +16,8 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
+static const int horizpadbar        = -5;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 10;        /* vertical padding for statusbar */
 static char *fonts[]          = { "Overpass:style=Regular:size=15:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
@@ -48,7 +50,26 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { " ", " ", " ", "  ", " ", " ", " ", " ", " " };
+static const char *tags[] = { "sys", "www", "dev", "chat", " ", " ", "music", "yt", "rec" };
+static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", " ", " ", "[music]", "[yt]", "[rec]" };
+
+static char *tagsel[][2] = {
+	{ "#6f8cb4", "#212126" },
+	{ "#e88854", "#212126" },
+	{ "#e1b56a", "#212126" },
+	{ "#ab75f0", "#212126" },
+	{ "#c2c2c2", "#212126" },
+	{ "#c2c2c2", "#212126" },
+	{ "#6fb482", "#212126" },
+	{ "#c45e5e", "#212126" },
+	{ "#c2c2c2", "#212126" },
+};
+
+
+static const unsigned int ulinepad	= 2;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
