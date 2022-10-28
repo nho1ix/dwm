@@ -8,6 +8,12 @@
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 6;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing = 5;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const unsigned int systrayiconsize = 28; /* systray icon size in px */
+static const int showsystray        = 1;     /* 0 means no systray */
 static unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
@@ -16,8 +22,10 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const int horizpadbar        = -5;        /* horizontal padding for statusbar */
+static const int horizpadbar        = 0;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 10;        /* vertical padding for statusbar */
+static const int vertpad = 0;     /* vertical padding of bar */
+static const int sidepad = 0;     /* horizontal padding of bar */
 static char *fonts[]          = { "Overpass:style=Regular:size=15:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
@@ -173,7 +181,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_BackSpace,	quit,		{0} },
+	{ MODKEY,			XK_BackSpace,	quit,		{1} },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("chromium") },
@@ -210,6 +218,9 @@ static const Key keys[] = {
 
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
+	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.25} },
+	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.25} },
+	{ MODKEY|ShiftMask,			XK_o,		setcfact,      	{.f =  0.00} },
 	{ MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
