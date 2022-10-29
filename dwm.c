@@ -2898,7 +2898,7 @@ updatesystray(void)
       i->y = 0;
     else
       i->y = (bh - systrayiconsize) / 2;
-		XMoveResizeWindow(dpy, i->win, i->x, 0, i->w, i->h);
+		XMoveResizeWindow(dpy, i->win, i->x, i->y, i->w, i->h);
 		w += i->w;
 		if (i->mon != m)
 			i->mon = m;
