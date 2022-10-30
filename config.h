@@ -221,7 +221,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
 	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.25} },
 	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.25} },
-	{ MODKEY|ShiftMask,			XK_o,		setcfact,      	{.f =  0.00} },
+	{ MODKEY,			XK_q,		setcfact,      	{.f =  0.00} },
 	// { MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
