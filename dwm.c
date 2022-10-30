@@ -427,7 +427,7 @@ applyrules(Client *c)
 		&& (!r->class || strstr(class, r->class))
 		&& (!r->instance || strstr(instance, r->instance)))
 		{
-                        c->iscentered = r->iscentered;
+      c->iscentered = r->iscentered;
 			c->isterminal = r->isterminal;
 			c->isfloating = r->isfloating;
 			c->noswallow  = r->noswallow;
@@ -2619,17 +2619,17 @@ updatebars(void)
 	}
 }
 
-void
+void 
 updatebarpos(Monitor *m)
 {
-	m->wy = m->my;
-	m->wh = m->mh;
-	if (m->showbar) {
-		m->wh -= bh;
-		m->by = m->topbar ? m->wy : m->wy + m->wh;
-		m->wy = m->topbar ? m->wy + bh : m->wy;
-	} else
-		m->by = -bh;
+  m->wy = m->my;
+  m->wh = m->mh;
+  if (m->showbar) {
+    m->wh = m->wh - vertpad - bh;
+    m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad;
+    m->wy = m->topbar ? m->wy + bh + vp : m->wy;
+  } else
+    m->by = -bh - vp;
 }
 
 void
@@ -2781,7 +2781,7 @@ updatesizehints(Client *c)
 	} else
 		c->maxa = c->mina = 0.0;
 	c->isfixed = (c->maxw && c->maxh && c->maxw == c->minw && c->maxh == c->minh);
-  c->hintsvalid =1;
+  c->hintsvalid = 1;
 }
 
 void updatestatus(void) {

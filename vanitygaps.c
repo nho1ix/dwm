@@ -22,6 +22,7 @@ static void tile(Monitor *);
 
 /* Internals */
 static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
+static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 static void setgaps(int oh, int ov, int ih, int iv);
 
 /* Settings */
@@ -162,19 +163,21 @@ void
 getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr)
 {
 	unsigned int n;
-	float mfacts, sfacts;
+	float mfacts = 0, sfacts = 0;
 	int mtotal = 0, stotal = 0;
 	Client *c;
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	mfacts = MIN(n, m->nmaster);
-	sfacts = n - m->nmaster;
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++)
+		if (n < m->nmaster)
+			mfacts += c->cfact;
+		else
+			sfacts += c->cfact;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++)
 		if (n < m->nmaster)
-			mtotal += msize / mfacts;
+			mtotal += msize * (c->cfact / mfacts);
 		else
-			stotal += ssize / sfacts;
+			stotal += ssize * (c->cfact / sfacts);
 
 	*mf = mfacts; // total factor of master area
 	*sf = sfacts; // total factor of stack area
@@ -286,20 +289,20 @@ centeredmaster(Monitor *m)
 	/* calculate facts */
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
 		if (!m->nmaster || n < m->nmaster)
-			mfacts += 1;
+			mfacts += c->cfact;
 		else if ((n - m->nmaster) % 2)
-			lfacts += 1; // total factor of left hand stack area
+			lfacts += c->cfact; // total factor of left hand stack area
 		else
-			rfacts += 1; // total factor of right hand stack area
+			rfacts += c->cfact; // total factor of right hand stack area
 	}
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++)
 		if (!m->nmaster || n < m->nmaster)
-			mtotal += mh / mfacts;
+			mtotal += mh * (c->cfact / mfacts);
 		else if ((n - m->nmaster) % 2)
-			ltotal += lh / lfacts;
+			ltotal += lh * (c->cfact / lfacts);
 		else
-			rtotal += rh / rfacts;
+			rtotal += rh * (c->cfact / rfacts);
 
 	mrest = mh - mtotal;
 	lrest = lh - ltotal;
@@ -533,7 +536,8 @@ tile(Monitor *m)
 
 	if (m->nmaster && n > m->nmaster) {
 		sw = (mw - iv) * (1 - m->mfact);
-		mw = (mw - iv) * m->mfact;
+		// mw = (mw - iv) * m->mfact;
+		mw = mw - iv - sw;
 		sx = mx + mw + iv;
 	}
 
@@ -541,12 +545,12 @@ tile(Monitor *m)
 
 	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			resize(c, mx, my, mw - (2*c->bw), (mh / mfacts) + (i < mrest ? 1 : 0) - (2*c->bw), 0);
+			resize(c, mx, my, mw - (2*c->bw), mh * (c->cfact / mfacts) + (i < mrest ? 1 : 0) - (2*c->bw), 0);
                         my += HEIGHT(c) + ih;
 //                       if (my + HEIGHT(c) < m->wh)
 //                              my += HEIGHT(c);
 		} else {
-			resize(c, sx, sy, sw - (2*c->bw), (sh / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
+			resize(c, sx, sy, sw - (2*c->bw), sh * (c->cfact / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
 //                      (sy + HEIGHT(c) < m->wh);
 			       sy += HEIGHT(c) + ih;
 		}
