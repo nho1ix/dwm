@@ -58,8 +58,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "sys", "www", "dev", "chat", " ", " ", "music", "yt", "rec" };
-static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", " ", " ", "[music]", "[yt]", "[rec]" };
+static const char *tags[] = { "sys", "www", "dev", "chat", "game", " ", "music", "yt", "rec" };
+static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", " ", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
 	{ "#84abeb", "#212126" },
