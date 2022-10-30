@@ -50,11 +50,11 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "Hermit:size=11", "-g", "50x20", "-e", "bc", "-lq", NULL };
+// const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "Hermit:size=11", "-g", "50x20", "-e", "", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spcalc",      spcmd2},
+	// {"spcalc",      spcmd2},
 };
 
 /* tagging */
@@ -62,11 +62,11 @@ static const char *tags[] = { "sys", "www", "dev", "chat", " ", " ", "musi
 static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", " ", " ", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
-	{ "#86aadf", "#212126" },
+	{ "#84abeb", "#212126" },
 	{ "#e1b56a", "#212126" },
 	{ "#6fb482", "#212126" },
-	{ "#a469f2", "#212126" },
-	{ "#c2c2c2", "#212126" },
+	{ "#aa71f4", "#212126" },
+	{ "#dc5656", "#212126" },
 	{ "#c2c2c2", "#212126" },
 	{ "#33cc5e", "#212126" },
 	{ "#dc5656", "#212126" },
@@ -84,6 +84,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
+	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
@@ -221,10 +222,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.25} },
 	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.25} },
 	{ MODKEY|ShiftMask,			XK_o,		setcfact,      	{.f =  0.00} },
-	{ MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
+	// { MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
-	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
+	// { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
 	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
@@ -272,22 +273,23 @@ static const Key keys[] = {
 	{ 0, XF86XK_AudioMute,		      spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,		      spawn,		SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,		      spawn,		SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") }, 
-	{ 0, XF86XK_AudioPrev,		      spawn,		SHCMD("mocp -r") },
-	{ 0, XF86XK_AudioNext,		      spawn,		SHCMD("mocp -f") },
-	{ 0, XF86XK_AudioPause,		      spawn,		SHCMD("mocp -P") },
-	{ 0, XF86XK_AudioPlay,		      spawn,		SHCMD("mocp -G") },
-	{ 0, XF86XK_AudioStop,		      spawn,		SHCMD("mocp -s") },
-	{ 0, XF86XK_AudioRewind,	      spawn,		SHCMD("mocp seek -10") },
-	{ 0, XF86XK_AudioForward,	      spawn,		SHCMD("mocp seek +10") },
+	{ 0, XF86XK_AudioPrev,		      spawn,		SHCMD("playerctl previous") },
+	{ 0, XF86XK_AudioNext,		      spawn,		SHCMD("playerctl next") },
+	{ 0, XF86XK_AudioPause,		      spawn,		SHCMD("playerctl pause") },
+	{ 0, XF86XK_AudioPlay,		      spawn,		SHCMD("playerctl play-pause") },
+	{ 0, XF86XK_AudioStop,		      spawn,		SHCMD("playerctl stop") },
+	{ 0, XF86XK_AudioRewind,	      spawn,		SHCMD("playerctl position 10-") },
+	{ 0, XF86XK_AudioForward,	      spawn,		SHCMD("playerctl position 10+") },
 	{ 0, XF86XK_AudioMedia,		      spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	{ 0, XF86XK_AudioMicMute,	      spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
-	{ 0, XF86XK_Calculator,		      spawn,		SHCMD(TERMINAL " -e bc -l") },
+	{ 0, XF86XK_Calculator,		      spawn,		SHCMD(TERMINAL " -e qalc") },
+  { 0, XF86XK_Explorer,           spawn,    SHCMD(TERMINAL " -e vifm") },
 	{ 0, XF86XK_Sleep,	           	spawn,		SHCMD("sudo -A zzz") },
 	{ 0, XF86XK_WWW,		            spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
 	{ 0, XF86XK_DOS,		            spawn,		{.v = termcmd } },
 	{ 0, XF86XK_ScreenSaver,	      spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,		        spawn,		SHCMD(TERMINAL " -e htop") },
-	{ 0, XF86XK_Mail,		            spawn,		SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks") },
+	{ 0, XF86XK_Mail,		            spawn,		SHCMD(TERMINAL " -e thunderbird") },
 	{ 0, XF86XK_MyComputer,		      spawn,		SHCMD(TERMINAL " -e lfub /") },
 	{ 0, XF86XK_Launch1,		        spawn,		SHCMD("xset dpms force off") },
 	{ 0, XF86XK_TouchpadToggle,   	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
