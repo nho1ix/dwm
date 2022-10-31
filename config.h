@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
@@ -40,7 +39,7 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  normfgcolor,  selbordercolor  },
        [SchemeStatus] = { selfgcolor, normbgcolor, selbordercolor }, // Statusbar right
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
-       [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor}, // Tagbar left unselecte
+       [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor }, // Tagbar left unselecte
        [SchemeInfoSel] = { selfgcolor, normbgcolor, selbordercolor }, // infobar middle selected
        [SchemeInfoNorm] = { selbgcolor, normbgcolor, selbordercolor }, // infobar middle unselected
 };
@@ -62,15 +61,15 @@ static const char *tags[] = { "sys", "www", "dev", "chat", "game", " ", "musi
 static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", " ", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
-	{ "#84abeb", "#212126" },
-	{ "#e1b56a", "#212126" },
-	{ "#6fb482", "#212126" },
-	{ "#aa71f4", "#212126" },
-	{ "#dc5656", "#212126" },
-	{ "#c2c2c2", "#212126" },
-	{ "#33cc5e", "#212126" },
-	{ "#dc5656", "#212126" },
-	{ "#c2c2c2", "#212126" },
+	{ "#84abeb", selbgcolor },
+	{ "#e1b56a", selbgcolor },
+	{ "#6fb482", selbgcolor },
+	{ "#aa71f4", selbgcolor },
+	{ "#dc5656", selbgcolor },
+	{ "#c2c2c2", selbgcolor },
+	{ "#33cc5e", selbgcolor },
+	{ "#dc5656", selbgcolor },
+	{ "#c2c2c2", selbgcolor },
 };
 
 
@@ -140,10 +139,10 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 ResourcePref resources[] = {
 		// { "color0",		STRING,	&normbordercolor },
 		// { "color8",		STRING,	&selbordercolor },
-		// { "color0",		STRING,	&normbgcolor },
-		// { "color4",		STRING,	&normfgcolor },
-		// { "color0",		STRING,	&selfgcolor },
-		// { "color4",		STRING,	&selbgcolor },
+		{ "color17",		STRING,	&normbgcolor },
+		{ "color18",		STRING,	&normfgcolor },
+		{ "color18",		STRING,	&selfgcolor },
+		{ "color19",		STRING,	&selbgcolor },
 		{ "borderpx",		INTEGER, &borderpx },
 		{ "snap",		INTEGER, &snap },
 		{ "showbar",		INTEGER, &showbar },
@@ -256,7 +255,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	      spawn,		SHCMD("killall xinit") },
 
-	{ MODKEY,			XK_F1,  	spawn,		SHCMD("setxkbmap us -option capslock:backspace && sh ~/.config/scripts/setxkbmap.sh") },
+	{ MODKEY,			XK_F1,  	spawn,		SHCMD("sh ~/.local/bin/dmenu-change-mode") },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("instagram-nativefier") },
