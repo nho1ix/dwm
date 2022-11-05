@@ -32,7 +32,7 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
-static char selbgcolor[]            = "#414350";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#111016";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },

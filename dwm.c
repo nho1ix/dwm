@@ -1549,7 +1549,6 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
   updatesizehints(c);
 	updatewmhints(c);
-
 	{
 		int format;
 		unsigned long *data, n, extra;
@@ -2241,7 +2240,6 @@ setup(void)
 	xatom[Manager] = XInternAtom(dpy, "MANAGER", False);
 	xatom[Xembed] = XInternAtom(dpy, "_XEMBED", False);
 	xatom[XembedInfo] = XInternAtom(dpy, "_XEMBED_INFO", False);
-    /* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
