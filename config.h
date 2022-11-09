@@ -32,7 +32,7 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
-static char selbgcolor[]            = "#111016";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#212126";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -271,8 +271,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	{ 0, XF86XK_AudioMute,		      spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,		      spawn,		SHCMD("pamixer --allow-boost -i 2; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioLowerVolume,		      spawn,		SHCMD("pamixer --allow-boost -d 2; kill -44 $(pidof dwmblocks)") }, 
+	{ 0, XF86XK_AudioRaiseVolume,		      spawn,		SHCMD("playerctl volume 0.02+ && ./.config/scripts/volume.sh") },
+	{ 0, XF86XK_AudioLowerVolume,		      spawn,		SHCMD("playerctl volume 0.02- && ./.config/scripts/volume.sh") }, 
 	{ 0, XF86XK_AudioPrev,		      spawn,		SHCMD("playerctl previous") },
 	{ 0, XF86XK_AudioNext,		      spawn,		SHCMD("playerctl next") },
 	{ 0, XF86XK_AudioPause,		      spawn,		SHCMD("playerctl pause") },
