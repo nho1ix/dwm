@@ -25,7 +25,7 @@ static const int horizpadbar        = 0;        /* horizontal padding for status
 static const int vertpadbar         = 10;        /* vertical padding for statusbar */
 static const int vertpad = 0;     /* vertical padding of bar */
 static const int sidepad = 0;     /* horizontal padding of bar */
-static char *fonts[]          = { "Overpass:style=Regular:size=15:antialias=true:autohint=true", 
+static char *fonts[]          = { "Overpass:style=Regular:pixelsize=18:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
