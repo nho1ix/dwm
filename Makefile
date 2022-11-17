@@ -10,12 +10,12 @@ all: options dwm
 
 options:
 	@echo dwm build options:
-	@echo "CFLAGS   = ${CFLAGS}"
+	@echo "CFLAGS   = -03 $(filter-out -Os,$(CFLAGS))"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
 
 .c.o:
-	${CC} -c ${CFLAGS} $<
+	${CC} -c -03 $(filter-out -Os,$(CFLAGS)) $<
 
 ${OBJ}: config.h config.mk
 
