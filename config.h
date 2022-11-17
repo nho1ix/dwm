@@ -168,6 +168,7 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	{ MODKEY,			XK_grave,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
+	{ False|ControlMask,		XK_grave,	spawn,	{.v = (const char*[]){ "wired", "-s", "1", NULL } } },
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
 	TAGKEYS(			XK_3,		2)
@@ -252,10 +253,10 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
 
-	{ MODKEY,			XK_Page_Up,	  spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-f", "-s", "Pictures/Screenshots/Temporary", NULL } } },
+	{ MODKEY,			XK_Page_Up,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-f", "-s", "Pictures/Screenshots/Temporary", NULL } } },
 	{ MODKEY,			XK_Page_Down,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-r", "-s", "Pictures/Screenshots/Temporary", NULL } } },
-	{ MODKEY,			XK_Insert,	  spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
-	{ MODKEY,			XK_End,	      spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
+	{ MODKEY,			XK_Insert, 	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
+	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
 	{ MODKEY,			XK_F1,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
@@ -269,6 +270,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "picom", NULL } } }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
+	{ False|ControlMask,		XK_space,	spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
