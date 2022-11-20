@@ -15,7 +15,7 @@ options:
 	@echo "CC       = ${CC}"
 
 .c.o:
-	${CC} -c -03 $(filter-out -Os,$(CFLAGS)) $<
+	${CC} -c $(filter-out -Os,$(CFLAGS)) $<
 
 ${OBJ}: config.h config.mk
 
