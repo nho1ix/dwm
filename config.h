@@ -22,10 +22,10 @@ static int smartgaps          = 0;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 0;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 10;        /* vertical padding for statusbar */
+static const int vertpadbar         = 15;        /* vertical padding for statusbar */
 static const int vertpad = 0;     /* vertical padding of bar */
 static const int sidepad = 0;     /* horizontal padding of bar */
-static char *fonts[]          = { "Overpass:style=Regular:size=15:antialias=true:autohint=true", 
+static char *fonts[]          = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
                                   "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
@@ -57,8 +57,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "sys", "www", "dev", "chat", "game", " ", "music", "yt", "rec" };
-static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", " ", "[music]", "[yt]", "[rec]" };
+static const char *tags[] = { "sys", "www", "dev", "chat", "game", "tv", "music", "yt", "rec" };
+static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", "[tv]", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
 	{ "#84abeb", selbgcolor },
@@ -66,7 +66,7 @@ static char *tagsel[][2] = {
 	{ "#6fb482", selbgcolor },
 	{ "#aa71f4", selbgcolor },
 	{ "#dc5656", selbgcolor },
-	{ "#c2c2c2", selbgcolor },
+	{ "#ca9ee6", selbgcolor },
 	{ "#33cc5e", selbgcolor },
 	{ "#dc5656", selbgcolor },
 	{ "#c2c2c2", selbgcolor },
@@ -88,6 +88,7 @@ static const Rule rules[] = {
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
+	{ NULL,       NULL,       "ru-turikhay-tlauncher-bootstrap-Bootstrap",   0,            1,           1,         0,        -1 },
 	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
 	{ TERMCLASS,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
 	{ TERMCLASS,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
