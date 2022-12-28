@@ -11,7 +11,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 5;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const unsigned int systrayiconsize = 20; /* systray icon size in px */
+static const unsigned int systrayiconsize = 25; /* systray icon size in px */
 static const int showsystray        = 1;     /* 0 means no systray */
 static unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -188,7 +188,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	quit,		{1} },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
-	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "chromium", NULL } } },
+	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "firefox", NULL } } },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "thunderbird", NULL } } },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ytop", NULL } } },
@@ -236,7 +236,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "firefox", NULL } } }, 
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "brave", NULL } } },
@@ -263,7 +263,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F2,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		{.v = (const char*[]){ "instagram-nativefier", NULL } } },
-	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
+	{ MODKEY,			XK_F5,		spawn,		{.v = (const char*[]){ "discord", "--disable-gpu-vsync", "--disable-frame-rate-limit", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", ".config/wall/cloudy_mountains.jpg", NULL } } },
 	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", ".config/wall/latest.png", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
@@ -294,7 +294,7 @@ static const Key keys[] = {
 	{ 0, XF86XK_DOS,		spawn,		{.v = termcmd } },
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
-	{ 0, XF86XK_Mail,		spawn,		{.v = (const char*[]){ "gnucash", NULL } } },
+	{ 0, XF86XK_Mail,		spawn,		{.v = (const char*[]){ "xev", NULL } } },
 	{ 0, XF86XK_MyComputer,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub /", NULL } } },
 	{ 0, XF86XK_Launch1,		spawn,		{.v = (const char*[]){ "xset", "dpms", "force", "off", NULL } } },
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
