@@ -57,8 +57,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "sys", "www", "dev", "chat", "game", "tv", "yt", "music", "rec" };
-static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", "[tv]", "[yt]", "[music]", "[rec]" };
+static const char *tags[] = { "sys", "www", "dev", "chat", "game", "tv", "music", "yt", "rec" };
+static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", "[tv]", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
 	{ "#84abeb", selbgcolor },
@@ -67,8 +67,8 @@ static char *tagsel[][2] = {
 	{ "#aa71f4", selbgcolor },
 	{ "#dc5656", selbgcolor },
 	{ "#ca9ee6", selbgcolor },
-	{ "#dc5656", selbgcolor },
 	{ "#33cc5e", selbgcolor },
+	{ "#dc5656", selbgcolor },
 	{ "#c2c2c2", selbgcolor },
 };
 
@@ -83,7 +83,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
-	{ "Spotify",  NULL,       NULL,             1 << 7,       0,           0,         0,         0,        -1 },
+	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         0,         0,        -1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
 	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        -1 },
