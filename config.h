@@ -260,7 +260,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Insert, 	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
-	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "discord", "--disable-gpu-vsync", "--disable-frame-rate-limit", NULL } } },
+	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
