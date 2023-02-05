@@ -276,9 +276,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl volume 0.02+ && sh -c ~/.config/scripts/volume.sh") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl volume 0.02+ && sh -c ~/.config/scripts/volume.sh") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl volume 0.02- && sh ~/.config/scripts/volume.sh") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh -c ~/.config/scripts/volume.sh") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/volume.sh") },
 	{ 0, XF86XK_AudioPrev,		spawn,		{.v = (const char*[]){ "playerctl", "previous", NULL } } },
 	{ 0, XF86XK_AudioNext,		spawn,		{.v = (const char*[]){ "playerctl", "next", NULL } } },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "playerctl", "pause", NULL } } },
