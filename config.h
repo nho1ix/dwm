@@ -82,7 +82,6 @@ static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "instagram-nativefier", NULL,   NULL,     1 << 3,       0,           0,         0,         0,        -1 },
 	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         0,         0,        -1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
@@ -223,10 +222,11 @@ static const Key keys[] = {
 
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
-	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.25} },
-	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.25} },
+	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.05} },
+	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.05} },
 	{ MODKEY,			XK_q,		setcfact,      	{.f =  0.00} },
 	// { MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
+	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
 	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
@@ -236,7 +236,7 @@ static const Key keys[] = {
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
-	{ MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
+	// { MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
@@ -260,14 +260,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Insert, 	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
-	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
+	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "", NULL } } },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", ".config/wall/cloudy_mountains.jpg", NULL } } },
-	{ MODKEY,			XK_F7,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", ".config/wall/latest.png", NULL } } },
-	// { MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("hsetroot -cover ~/.config/wall/cloudy_mountains.jpg") },
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("hsetroot -cover ~/.config/wall/latest.png") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "picom", NULL } } }, 
