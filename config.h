@@ -97,6 +97,13 @@ static const Rule rules[] = {
 static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+
+static int lpm[] = {
+        /* Index of preferred layout], if LENGTH(lpm)<#monitors -> default layout */
+        0, 1
+};
+
+
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 static const Layout layouts[] = {
@@ -188,7 +195,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	quit,		{1} },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
-	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "firefox", NULL } } },
+	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "chromium", NULL } } },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "thunderbird", NULL } } },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ytop", NULL } } },
@@ -218,10 +225,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
 	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
-	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
+	{ MODKEY,			XK_h,		setmfact,	{.f = -0.01} },
 
 	/* J and K are automatically bound above in STACKEYS */
-	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
+	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.01} },
 	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.05} },
 	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.05} },
 	{ MODKEY,			XK_q,		setcfact,      	{.f =  0.00} },
@@ -237,7 +244,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	// { MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "firefox", NULL } } }, 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "brave", NULL } } },
@@ -260,13 +267,14 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Insert, 	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
-	{ MODKEY,			XK_F1,		spawn,		{.v = (const char*[]){ "", NULL } } },
+	{ MODKEY,			XK_F1,		spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && sh ~/.config/scripts/dcram.sh") },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
-	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && xsct -c 1 3800 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("hsetroot -cover ~/.config/wall/cloudy_mountains.jpg") },
-	{ MODKEY,			XK_F7,		spawn,		SHCMD("hsetroot -cover ~/.config/wall/latest.png") },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg --bg-fill ~/.config/wall/DSCF0180.JPG") },
+	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/DSCF0180.JPG") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --pos 1512x490 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x0 --rotate left --scale 1.4x1.4") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "picom", NULL } } }, 

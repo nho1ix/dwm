@@ -217,6 +217,7 @@ struct Systray {
 };
 
 /* function declarations */
+static void applydefaultlayouts();
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
 static void arrange(Monitor *m);
@@ -291,6 +292,7 @@ static void setmfact(const Arg *arg);
 static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
+static void sigchld(int unused);
 static int solitary(Client *c);
 static void sighup(int unused);
 static void sigterm(int unused);
@@ -400,6 +402,21 @@ static xcb_connection_t *xcon;
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
 /* function implementations */
+void
+applydefaultlayouts()
+{
+    Monitor *m;
+    int i = 0;
+    for (m = mons; m; m = m->next) {
+        if (i < LENGTH(lpm)) {
+            m->lt[0] = &layouts[lpm[i]];
+            m->lt[1] = &layouts[(lpm[i] + 1)/ LENGTH(layouts)];
+            strncpy(m->ltsymbol, layouts[i].symbol, sizeof m->ltsymbol);
+        }
+        i++;
+    }
+}
+
 void
 applyrules(Client *c)
 {
@@ -2206,16 +2223,9 @@ setup(void)
 	int i;
 	XSetWindowAttributes wa;
 	Atom utf8string;
-	struct sigaction sa;
 
-	/* do not transform children into zombies when they terminate */
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_NOCLDSTOP | SA_NOCLDWAIT | SA_RESTART;
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGCHLD, &sa, NULL);
-
-	/* clean up any zombies (inherited from .xinitrc etc) immediately */
-	while (waitpid(-1, NULL, WNOHANG) > 0);
+	/* clean up any zombies immediately */
+	sigchld(0);
 
 	signal(SIGHUP, sighup);
 	signal(SIGTERM, sigterm);
@@ -2332,6 +2342,14 @@ showhide(Client *c)
 		showhide(c->snext);
 		XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
 	}
+}
+
+void
+sigchld(int unused)
+{
+	if (signal(SIGCHLD, sigchld) == SIG_ERR)
+		die("can't install SIGCHLD handler:");
+	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
 void
@@ -2710,6 +2728,7 @@ updategeom(void)
 				cleanupmon(m);
 			}
 		}
+    applydefaultlayouts();
 		free(unique);
 	} else
 #endif /* XINERAMA */
