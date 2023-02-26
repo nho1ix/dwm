@@ -294,7 +294,7 @@ static void propertynotify(XEvent *e);
 static void pushstack(const Arg *arg);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
-// static void removesystrayicon(Client *i);
+static void removesystrayicon(Client *i);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizebarwin(Monitor *m);
 static void resizeclient(Client *c, int x, int y, int w, int h);
@@ -799,7 +799,6 @@ cleanupmon(Monitor *mon)
 		XUnmapWindow(dpy, mon->barwin);
 		XDestroyWindow(dpy, mon->barwin);
 	}
-	XDestroyWindow(dpy, mon->barwin);
 	free(mon);
 }
 
@@ -913,7 +912,9 @@ configurenotify(XEvent *e)
 					if (c->isfullscreen)
 						resizeclient(c, m->mx, m->my, m->mw, m->mh);
 				XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, m->ww, m->bh);
+				if (!usealtbar) {
 				resizebarwin(m);
+				}
 			}
 			focus(NULL);
 			arrange(NULL);
@@ -1019,6 +1020,13 @@ destroynotify(XEvent *e)
 		unmanagealtbar(ev->window);
 	else if (m->traywin == ev->window)
 		unmanagetray(ev->window);
+	else if ((c = wintosystrayicon(ev->window))) {
+		removesystrayicon(c);
+		resizebarwin(selmon);
+		updatesystray();
+	}
+	else if ((c = swallowingclient(ev->window)))
+		unmanage(c->swallowing, 1);
 }
 
 void
@@ -1735,8 +1743,6 @@ managetray(Window win, XWindowAttributes *wa)
 			(unsigned char *) &win, 1);
 }
 
-
-
 void
 mappingnotify(XEvent *e)
 {
@@ -2416,7 +2422,7 @@ setup(void)
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h + horizpadbar;
-	bh = usealtbar ? 0 : drw->fonts->h + 2;
+	bh = usealtbar ? 0 : drw->fonts->h + 2 + vertpadbar;
   sp = sidepad;
   vp = (topbar == 1) ? vertpad : -vertpad;
 	updategeom();
@@ -2818,7 +2824,7 @@ unmanage(Client *c, int destroyed)
 		updateclientlist();
 	}
 }
- 
+
 void
 unmanagealtbar(Window w)
 {
@@ -2865,17 +2871,17 @@ unmapnotify(XEvent *e)
 		unmanagealtbar(ev->window);
 	else if (m->traywin == ev->window)
 		unmanagetray(ev->window);
-	// else if ((c = wintosystrayicon(ev->window))) {
-	// 	/* KLUDGE! sometimes icons occasionally unmap their windows, but do
-	// 	 * _not_ destroy them. We map those windows back */
-	// 	XMapRaised(dpy, c->win);
-	// 	updatesystray();
+	else if ((c = wintosystrayicon(ev->window))) {
+		/* KLUDGE! sometimes icons occasionally unmap their windows, but do
+		 * _not_ destroy them. We map those windows back */
+		XMapRaised(dpy, c->win);
+		updatesystray();
+	}
 }
 
 void
 updatebars(void)
 {
-
 	if (usealtbar)
 		return;
 
@@ -2909,9 +2915,14 @@ updatebarpos(Monitor *m)
 {
   m->wy = m->my;
   m->wh = m->mh;
-  if (m->showbar) {
+  if (m->showbar && !usealtbar) {
+    m->wh = m->wh - vertpad - bh;
     m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad;
     m->wy = m->topbar ? m->wy + bh + vp : m->wy;
+  } else if (m->showbar && usealtbar) {
+		m->wh -= m->bh;
+ 		m->by = m->topbar ? m->wy : m->wy + m->wh;
+		m->wy = m->topbar ? m->wy + m->bh : m->wy;
   } else
     m->by = -bh - vp;
 }
