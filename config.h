@@ -248,7 +248,7 @@ static const Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "brave", NULL } } },
-	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
+	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
@@ -257,10 +257,10 @@ static const Key keys[] = {
 	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "next", NULL } } },
 	{ MODKEY|ShiftMask,		XK_period,	spawn,		{.v = (const char*[]){ "mocp", "-t", "repeat", NULL } } },
 
-	{ MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
-	{ MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
-	{ MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
-	{ MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
+	{ MODKEY|ControlMask,			XK_comma,	focusmon,	{.i = -1 } },
+	{ MODKEY|ControlMask|ShiftMask,		XK_comma,	tagmon,		{.i = -1 } },
+	{ MODKEY|ControlMask,			XK_period,	focusmon,	{.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask,		XK_period,	tagmon,		{.i = +1 } },
 
 	{ MODKEY,			XK_Page_Up,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-f", "-s", "Pictures/Screenshots/Temporary", NULL } } },
 	{ MODKEY,			XK_Page_Down,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-r", "-s", "Pictures/Screenshots/Temporary", NULL } } },
