@@ -2,7 +2,7 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "chromium"
+#define BROWSER "firefox"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -31,7 +31,7 @@ static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
-static char selbordercolor[]            = "#9a9ac1";  // mark-lin mountain
+static char selbordercolor[]            = "#aaaaee";  // mark-lin mountain
 static char selbgcolor[]            = "#212126";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -57,8 +57,8 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "sys", "www", "dev", "chat", "game", "tv", "music", "yt", "rec" };
-static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[game]", "[tv]", "[music]", "[yt]", "[rec]" };
+static const char *tags[] = { "sys", "www", "dev", "chat", "notes", "tv", "music", "yt", "rec" };
+static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[notes]", "[tv]", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
 	{ "#84abeb", selbgcolor },
@@ -85,7 +85,8 @@ static const Rule rules[] = {
 	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         0,         0,        -1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        -1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        -1 },
+	{ "obsidian",      NULL,       NULL,   	    1 << 4,       0,           0,         1,         0,        -1 },
+	// { "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ NULL,       NULL,       "ru-turikhay-tlauncher-bootstrap-Bootstrap",   0,            1,           1,         0,        -1 },
 	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
@@ -188,18 +189,19 @@ static const Key keys[] = {
 	TAGKEYS(			XK_9,		8)
 	{ MODKEY,			XK_0,		view,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_BackSpace,	quit,		{1} },
-	{ MODKEY,			XK_Tab,		view,		{0} },
-	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
-	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "chromium", NULL } } },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
+
+	/* Application Keybinds */
+	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "firefox", NULL } } },
+	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "ebook-viewer", NULL } } },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
+	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "thunderbird", NULL } } },
-	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ytop", NULL } } },
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
+	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
+	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
+	{ MODKEY|ShiftMask,		XK_p,			spawn,          {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
+	
+	/* DWM Layouts */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
@@ -208,65 +210,73 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, /* monocle */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} }, /* fullscreen */
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
-	{ MODKEY|ShiftMask,		XK_p,			spawn,          {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
+
+	/* Console / Terminal Programs */
+	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
+	{ MODKEY,			XK_p,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
+	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
+	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ytop", NULL } } },
+	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
+
+	/* Spotify Keybinds */
+	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
+	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "previous", NULL } } },
+	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "next", NULL } } },
+
+  /* Master Volume Controls */
+	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
+
+	/* Music / Playback Controls */
 	{ MODKEY,			XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10-", NULL } } },
 	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "60-", NULL } } },
 	{ MODKEY,			XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "10+", NULL } } },
 	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "60+", NULL } } }, 
-	{ MODKEY,			XK_backslash,		view,		{0} },
 
+	/* Navigational Keybinds */
+	{ MODKEY,			XK_s,		togglesticky,	{0} },
+	{ MODKEY,			XK_f,		togglefullscr,	{0} },
+	{ MODKEY,			XK_b,		togglebar,	{0} },
 	{ MODKEY,			XK_a,		togglegaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
-	{ MODKEY,			XK_s,		togglesticky,	{0} },
-	{ MODKEY,			XK_p,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
-	{ MODKEY,			XK_f,		togglefullscr,	{0} },
-	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
-	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
-	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
-	{ MODKEY,			XK_h,		setmfact,	{.f = -0.01} },
-
-	/* J and K are automatically bound above in STACKEYS */
-	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.01} },
-	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.05} },
-	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.05} },
-	{ MODKEY,			XK_q,		setcfact,      	{.f =  0.00} },
-	// { MODKEY,			XK_d,		spawn,		SHCMD(TERMINAL " -e ikhal") },
-	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
-	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
-	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
-	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
-	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
-	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
-
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
-	// { MODKEY,			XK_c,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "profanity", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "firefox", NULL } } }, 
-	/* V is automatically bound above in STACKKEYS */
-	{ MODKEY,			XK_b,		togglebar,	{0} },
-	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "brave", NULL } } },
-	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
-	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
-	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "previous", NULL } } },
-	{ MODKEY|ShiftMask,		XK_comma,	spawn,		{.v = (const char*[]){ "mocp", "-j", "N{%,0}", NULL } } },
-	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "next", NULL } } },
-	{ MODKEY|ShiftMask,		XK_period,	spawn,		{.v = (const char*[]){ "mocp", "-t", "repeat", NULL } } },
+	{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
+	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
+	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
+	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
+	{ MODKEY,			XK_BackSpace,	quit,		{1} },
+	{ MODKEY,			XK_Tab,		view,		{0} },
+	{ MODKEY,			XK_backslash,		view,		{0} },
+	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
 
+	/* Monitor Related Keybinds */
 	{ MODKEY|ControlMask,			XK_comma,	focusmon,	{.i = -1 } },
 	{ MODKEY|ControlMask|ShiftMask,		XK_comma,	tagmon,		{.i = -1 } },
 	{ MODKEY|ControlMask,			XK_period,	focusmon,	{.i = +1 } },
 	{ MODKEY|ControlMask|ShiftMask,		XK_period,	tagmon,		{.i = +1 } },
 
+	/* J and K are automatically bound above in STACKEYS */
+	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.01} },
+	{ MODKEY,			XK_h,		setmfact,	{.f = -0.01} },
+	{ MODKEY|ShiftMask,			XK_h,		setcfact,      	{.f = +0.05} },
+	{ MODKEY|ShiftMask,			XK_l,		setcfact,      	{.f = -0.05} },
+	{ MODKEY,			XK_q,		setcfact,      	{.f =  0.00} },
+	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
+
+	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_Page_Up,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-f", "-s", "Pictures/Screenshots/Temporary", NULL } } },
 	{ MODKEY,			XK_Page_Down,	spawn,   	{.v = (const char*[]){ "xfce4-screenshooter", "-r", "-s", "Pictures/Screenshots/Temporary", NULL } } },
-	{ MODKEY,			XK_Insert, 	spawn,		SHCMD("setxkbmap dvorak -option capslock:backspace && sh ~/.config/scripts/setxkbmap_dvorak.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
+	/* F1-F12 Keybinds */
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && sh ~/.config/scripts/dcram.sh") },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && xsct -c 1 3800 && sh ~/.config/scripts/sct.sh") },
@@ -274,14 +284,18 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg --bg-fill ~/.config/wall/DSCF0180.JPG") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/DSCF0180.JPG") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --pos 1512x490 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x0 --rotate left --scale 1.4x1.4") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1512x442 --auto --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1.4x1.4") },
+	{ MODKEY,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 1920x1080_165") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "picom", NULL } } }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ WINKEY,			XK_space,	spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
+	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -i") },
+	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -d") },
 
+	/* Fn Keybinds */
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh ~/.config/scripts/volume.sh") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/volume.sh") },
