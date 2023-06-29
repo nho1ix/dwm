@@ -337,7 +337,6 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
-// static void xrdb(const Arg *arg); (unused function)
 static void load_xresources(void);
 static void resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst);
 
@@ -3150,17 +3149,6 @@ xerrorstart(Display *dpy, XErrorEvent *ee)
 	return -1;
 }
 
-// void
-// xrdb(const Arg *arg)
-// {
-//   loadxrdb();
-//   int i;
-//   for (i = 0; i < LENGTH(colors); i++)
-//                 scheme[i] = drw_scm_create(drw, colors[i], 3);
-//   focus(NULL);
-//   arrange(NULL);
-// }
-
 Monitor *
 systraytomon(Monitor *m) {
 	Monitor *t;
@@ -3187,18 +3175,6 @@ zoom(const Arg *arg)
 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
 		return;
 	pop(c);
-}
-
-void
-xrdb(const Arg *arg)
-{
-    load_xresources();
-
-    for (int i = 0; i < LENGTH(colors); i++)
-        scheme[i] = drw_scm_create(drw, colors[i], 3);
-
-    focus(NULL);
-    arrange(NULL);
 }
 
 void
