@@ -2,7 +2,7 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "firefox"
+#define BROWSER "/usr/bin/firefox"
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -32,14 +32,14 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#aaaaee";  // mark-lin mountain
-static char selbgcolor[]            = "#212126";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#ff0000";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  normfgcolor,  selbordercolor  },
        [SchemeStatus] = { selfgcolor, normbgcolor, selbordercolor }, // Statusbar right
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
-       [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor }, // Tagbar left unselecte
+       [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor }, // Tagbar left unselected
        [SchemeInfoSel] = { selfgcolor, normbgcolor, selbordercolor }, // infobar middle selected
        [SchemeInfoNorm] = { selbgcolor, normbgcolor, selbordercolor }, // infobar middle unselected
 };
@@ -152,7 +152,7 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 ResourcePref resources[] = {
 		// { "color0",		STRING,	&normbordercolor },
 		// { "color8",		STRING,	&selbordercolor },
-		// { "color17",		STRING,	&normbgcolor },
+		{ "color17",		STRING,	&normbgcolor },
 		{ "color18",		STRING,	&normfgcolor },
 		{ "color18",		STRING,	&selfgcolor },
 		{ "color19",		STRING,	&selbgcolor },
@@ -196,11 +196,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "firefox", NULL } } },
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "ebook-viewer", NULL } } },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
-	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", "--disable-frame-rate-limit", NULL } } },
+	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "thunderbird", NULL } } },
-	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ "spotify", NULL } } },
-	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
+	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
+	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "spotify", NULL } } },
+	{ MODKEY|ShiftMask,			XK_m,		spawn,		{.v = (const char*[]){ "ncmpcpp", NULL } } },
+	// { MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
+	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "davinci", NULL } } },
 	{ MODKEY|ShiftMask,		XK_p,			spawn,          {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
 	
 	/* DWM Layouts */
@@ -225,10 +227,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 
 	/* Spotify Keybinds */
-	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause && sh ~/.config/scripts/play-pause.sh") },
-	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "previous", NULL } } },
-	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "playerctl", "-p", "spotify", "next", NULL } } },
+	{ MODKEY|ShiftMask,			XK_apostrophe,	spawn,		SHCMD("mpc toggle") },
+	{ MODKEY,			XK_comma,	spawn,		SHCMD("playerctl -p spotify previous") },
+	{ MODKEY,			XK_period,	spawn,		SHCMD("playerctl -p spotify next") },
+	{ MODKEY|ShiftMask,			XK_comma,	spawn,		SHCMD("mpc prev; kill -46 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,			XK_period,	spawn,		SHCMD("mpc next; kill -46 $(pidof dwmblocks)") },
+
 
   /* Master Volume Controls */
 	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
@@ -237,10 +242,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
 
 	/* Music / Playback Controls */
-	{ MODKEY,			XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10-", NULL } } },
-	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "60-", NULL } } },
-	{ MODKEY,			XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "10+", NULL } } },
-	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "60+", NULL } } }, 
+	{ MODKEY,			XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10-", NULL } } }, 
+	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seekthrough -00:00:10; kill -46 $(pidof dwmblocks)") }, 
+	// { MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "60-", NULL } } },
+	{ MODKEY,			XK_bracketright,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10+", NULL } } },  
+	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seekthrough +00:00:10; kill -46 $(pidof dwmblocks)") }, 
+	// { MODKEY|ShiftMask,		XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "60+", NULL } } }, 
 
 	/* Navigational Keybinds */
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
@@ -274,8 +281,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 
 	/* V is automatically bound above in STACKKEYS */
-	{ WINKEY,			XK_Home, spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=1.1:saturation=1:contrast=0.85:brightness=0.025:gamma_g=1.04\"; ~/.config/scripts/droidcam.sh") },
-	{ WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=2:saturation=1.75:contrast=1.06:brightness=0.05:gamma_g=0.99\"; ~/.config/scripts/droidcam.sh") },
+	// { WINKEY,			XK_Home, spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=1.1:saturation=1:contrast=0.85:brightness=0.025:gamma_g=1.04\"; ~/.config/scripts/droidcam.sh") },
+	// { WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=2:saturation=1.75:contrast=1.06:brightness=0.05:gamma_g=0.99\"; ~/.config/scripts/droidcam.sh") },
 	{ MODKEY,			XK_Page_Up,	spawn,   	SHCMD("escrotum -s $f ~/Pictures/Screenshots/Temporary/'%Y-%m-%d-%H%M%S_$wx$h_escrotum.png'") },
 	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("sh ~/.config/scripts/ipbat.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
@@ -284,28 +291,31 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F1,		spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && sh ~/.config/scripts/dcram.sh") },
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && xsct -c 1 3800 && sh ~/.config/scripts/sct.sh") },
-	{ MODKEY,			XK_F4,		spawn,		SHCMD("sct 3000 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh") },
+	// { MODKEY,			XK_F4,		spawn,		SHCMD("sct 6500 && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg --bg-fill ~/.config/wall/DSCF0180.JPG") },
-	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/DSCF0180.JPG") },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg --bg-fill ~/.config/wall/_DSF1417.JPG") },
+	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/_DSF1417.JPG") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1512x455 --auto --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1.4x1.4") },
-	{ MODKEY|ShiftMask,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --auto --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
+	{ MODKEY|ShiftMask,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1512x350 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1.4x1.4") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 1920x1080_165") },
-	{ MODKEY|ShiftMask,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 1600x900_165") },
+	{ MODKEY|ShiftMask,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --scale 1x1 --filter bilinear --auto --rotate normal --right-of HDMI-A-0 --output HDMI-A-0 --mode 1920x1080_74 --pos 0x20 --rotate normal --scale 1x1") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") },
 	{ MODKEY,			XK_F12,		spawn,		{.v = (const char*[]){ "picom", NULL } } }, 
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ WINKEY,			XK_space,	spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
-	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -i") },
-	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -d") },
+	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ncmpcppvol.sh -i && sh ~/.config/scripts/music_volume.sh") },
+	{ MODKEY|ShiftMask, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -i") },
+	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ncmpcppvol.sh -d && sh ~/.config/scripts/music_volume.sh") },
+	{ MODKEY|ShiftMask, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -d") },
 
 	/* Fn Keybinds */
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh ~/.config/scripts/volume.sh") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/volume.sh") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh ~/.config/scripts/spotify_volume.sh") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/spotify_volume.sh") },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "playerctl", "pause", NULL } } },
 	{ 0, XF86XK_AudioPlay,		spawn,		{.v = (const char*[]){ "playerctl", "play-pause", NULL } } },
 	{ 0, XF86XK_AudioStop,		spawn,		{.v = (const char*[]){ "playerctl", "stop", NULL } } },
@@ -343,12 +353,12 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
 #endif
-	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          {.v = (const char*[]){ TERMINAL, "-e", "vim", ".local/src/dwmblocks/config.h", NULL } } },
+	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          {.v = (const char*[]){ TERMINAL, "-e", "nvim", "/home/victor/.config/suckless/dwm/config.h", NULL } } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
-	{ ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -1} },
+	// { ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
+	// { ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -1} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
@@ -356,5 +366,10 @@ static const Button buttons[] = {
 	{ ClkTagBar,		0,		Button4,	shiftview,	{.i = -1} },
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
+
+	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify next") },
+	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify previous") },
+	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify next") },
+	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify previous") },
 };
 
