@@ -31,7 +31,7 @@ static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
-static char selbordercolor[]            = "#aaaaee";  // mark-lin mountain
+static char selbordercolor[]            = "#8eacbd";  // mark-lin mountain
 static char selbgcolor[]            = "#ff0000";  // mark-lin mountain coolar
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -201,8 +201,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "spotify", NULL } } },
 	{ MODKEY|ShiftMask,			XK_m,		spawn,		{.v = (const char*[]){ "ncmpcpp", NULL } } },
-	// { MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
-	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "davinci", NULL } } },
+	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
+	// { MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "davinci", NULL } } },
 	{ MODKEY|ShiftMask,		XK_p,			spawn,          {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
 	
 	/* DWM Layouts */
@@ -292,13 +292,14 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F2,		spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("sct 4500 && xsct -c 1 3800 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh") },
-	// { MODKEY,			XK_F4,		spawn,		SHCMD("sct 6500 && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh") },
+	{ MODKEY,			XK_F4,		spawn,		SHCMD("roblox") },
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/cloudy_mountains.jpg --bg-fill ~/.config/wall/_DSF1417.JPG") },
-	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/_DSF1417.JPG") },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129.JPG --bg-fill ~/.config/wall/_DSF2051.JPG") },
+	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/_DSF2051.JPG") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
-	{ MODKEY|ShiftMask,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1512x350 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1.4x1.4") },
+	// { MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 3840x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x296 --scale 2x2 --rotate normal") },
+	{ MODKEY|ShiftMask,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x156 --scale 1x1 --rotate left") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 1920x1080_165") },
 	{ MODKEY|ShiftMask,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --scale 1x1 --filter bilinear --auto --rotate normal --right-of HDMI-A-0 --output HDMI-A-0 --mode 1920x1080_74 --pos 0x20 --rotate normal --scale 1x1") },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
@@ -367,9 +368,11 @@ static const Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 
-	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify next") },
-	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify previous") },
-	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify next") },
-	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify previous") },
+	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next") },
+	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous") },
+	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next") },
+	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous") },
+	{ ClkClientWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
+	{ ClkRootWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 };
 
