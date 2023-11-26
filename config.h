@@ -26,7 +26,8 @@ static const int vertpadbar         = 15;        /* vertical padding for statusb
 static const int vertpad = 0;     /* vertical padding of bar */
 static const int sidepad = 0;     /* horizontal padding of bar */
 static char *fonts[]          = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
-                                  "JetBrainsMono Nerd Font:style=regular:pixelsize=12" };
+                                  "JetBrainsMono NFM:style=Regular:size=14",
+																	"Font Awesome 6 Free Regular:style=Regular" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
@@ -294,7 +295,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("roblox") },
 	{ MODKEY,			XK_F5,  	spawn,		{.v = (const char*[]){ "sh", ".local/bin/dmenu-change-mode", NULL } } },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129.JPG --bg-fill ~/.config/wall/_DSF2051.JPG") },
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/_DSF2051.JPG") },
 	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/_DSF2051.JPG") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
 	// { MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
