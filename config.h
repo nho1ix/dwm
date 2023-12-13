@@ -33,7 +33,8 @@ static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
 static char selbordercolor[]            = "#8eacbd";  // mark-lin mountain
-static char selbgcolor[]            = "#ff0000";  // mark-lin mountain coolar
+static char selbgcolor[]            = "#212126";  // selected bg tag color
+static char textbgcolor[]            = "#b3b3b3";  // unselected monitor text
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -42,7 +43,7 @@ static char *colors[][3] = {
        [SchemeTagsSel] = { selfgcolor, selbgcolor, selbordercolor }, // Tagbar left selected
        [SchemeTagsNorm] = { selfgcolor, normbgcolor, selbordercolor }, // Tagbar left unselected
        [SchemeInfoSel] = { selfgcolor, normbgcolor, selbordercolor }, // infobar middle selected
-       [SchemeInfoNorm] = { selbgcolor, normbgcolor, selbordercolor }, // infobar middle unselected
+       [SchemeInfoNorm] = { textbgcolor, normbgcolor, selbordercolor }, // infobar middle unselected
 };
 
 typedef struct {
@@ -58,12 +59,12 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "sys", "www", "dev", "chat", "notes", "tv", "music", "yt", "rec" };
-static const char *alttags[] = { "[sys]", "[www]", "[dev]", "[chat]", "[notes]", "[tv]", "[music]", "[yt]", "[rec]" };
+static const char *tags[] = { "www", "sys", "dev", "chat", "notes", "tv", "music", "yt", "rec" };
+static const char *alttags[] = { "[www]", "[sys]", "[dev]", "[chat]", "[notes]", "[tv]", "[music]", "[yt]", "[rec]" };
 
 static char *tagsel[][2] = {
-	{ "#84abeb", selbgcolor },
 	{ "#e1b56a", selbgcolor },
+	{ "#84abeb", selbgcolor },
 	{ "#6fb482", selbgcolor },
 	{ "#aa71f4", selbgcolor },
 	{ "#dc5656", selbgcolor },
@@ -143,6 +144,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMDno(cmd) { .v = (const char*[]){ cmd, NULL } }
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
@@ -156,7 +158,7 @@ ResourcePref resources[] = {
 		{ "color17",		STRING,	&normbgcolor },
 		{ "color18",		STRING,	&normfgcolor },
 		{ "color18",		STRING,	&selfgcolor },
-		{ "color19",		STRING,	&selbgcolor },
+		// { "color19",		STRING,	&selbgcolor },
 		{ "borderpx",		INTEGER, &borderpx },
 		{ "snap",		INTEGER, &snap },
 		{ "showbar",		INTEGER, &showbar },
@@ -235,7 +237,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_comma,	spawn,		SHCMD("mpc prev; kill -46 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,			XK_period,	spawn,		SHCMD("mpc next; kill -46 $(pidof dwmblocks)") },
 
-
   /* Master Volume Controls */
 	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
@@ -284,6 +285,7 @@ static const Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	// { WINKEY,			XK_Home, spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=1.1:saturation=1:contrast=0.85:brightness=0.025:gamma_g=1.04\"; ~/.config/scripts/droidcam.sh") },
 	// { WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=2:saturation=1.75:contrast=1.06:brightness=0.05:gamma_g=0.99\"; ~/.config/scripts/droidcam.sh") },
+	{ MODKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("python ~/Desktop/govee_btled/up_bright.py && sh ~/.config/scripts/govee_bright.sh") },
 	{ MODKEY,			XK_Page_Up,	spawn,   	SHCMD("escrotum -s $f ~/Pictures/Screenshots/Temporary/'%Y-%m-%d-%H%M%S_$wx$h_escrotum.png'") },
 	{ MODKEY,			XK_Page_Down,	spawn,   	SHCMD("sh ~/.config/scripts/ipbat.sh") },
 	{ MODKEY,			XK_End,	  	spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
@@ -299,7 +301,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/latest.png --bg-fill ~/.config/wall/_DSF2051.JPG") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
 	// { MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --scale 1x1 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74  --rotate left --scale 1x1") },
-	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 3840x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x296 --scale 2x2 --rotate normal") },
+	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_100 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x156 --scale 1x1 --rotate left") },
 	{ MODKEY|ShiftMask,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1080x0 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --pos 0x156 --scale 1x1 --rotate left") },
 	{ MODKEY,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 1920x1080_165") },
 	{ MODKEY|ShiftMask,			XK_F9,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --scale 1x1 --filter bilinear --auto --rotate normal --right-of HDMI-A-0 --output HDMI-A-0 --mode 1920x1080_74 --pos 0x20 --rotate normal --scale 1x1") },
