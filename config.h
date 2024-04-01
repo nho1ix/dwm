@@ -231,25 +231,25 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 
 	/* Spotify Keybinds */
-	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p $(playerctl -l | rg firefox) && sh ~/.config/scripts/play-pause.sh") },
-	{ MODKEY|ShiftMask,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p spotify && sh ~/.config/scripts/play-pause-spotify.sh") },
-	{ MODKEY,			XK_comma,	spawn,		SHCMD("playerctl -p spotify previous") },
-	{ MODKEY,			XK_period,	spawn,		SHCMD("playerctl -p spotify next") },
-	{ MODKEY|ShiftMask,			XK_comma,	spawn,		SHCMD("mpc prev; kill -46 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,			XK_period,	spawn,		SHCMD("mpc next; kill -46 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p spotify && sh ~/.config/scripts/play-pause-spotify.sh") },
+	{ MODKEY|ShiftMask,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p $(playerctl -l | rg firefox) && sh ~/.config/scripts/play-pause.sh") },
+	{ MODKEY,			XK_comma,	spawn,		SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ MODKEY,			XK_period,	spawn,		SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ MODKEY|ShiftMask,			XK_comma,	spawn,		SHCMD("mpc prev; pkill -RTMIN+12 dwmblocks") },
+	{ MODKEY|ShiftMask,			XK_period,	spawn,		SHCMD("mpc next; pkill -RTMIN+12 dwmblocks") },
 
   /* Master Volume Controls */
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; pkill -RTMIN+10 dwmblocks") },
+	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; pkill -RTMIN+10 dwmblocks") },
 
 	/* Music / Playback Controls */
-	{ MODKEY,			XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10-", NULL } } }, 
-	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seekthrough -00:00:10; kill -46 $(pidof dwmblocks)") }, 
+	{ MODKEY,			XK_bracketleft,		spawn,		SHCMD("playerctl position 10- && ~/.config/scripts/skip-spotify.sh -b") },
+	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seekthrough -00:00:10; pkill -RTMIN+12 dwmblocks") }, 
 	// { MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "60-", NULL } } },
-	{ MODKEY,			XK_bracketright,		spawn,		{.v = (const char*[]){ "playerctl", "position", "10+", NULL } } },  
-	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seekthrough +00:00:10; kill -46 $(pidof dwmblocks)") }, 
+	{ MODKEY,			XK_bracketright,		spawn,		SHCMD("playerctl position 10+ && sh ~/.config/scripts/skip-spotify.sh -f") },
+	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seekthrough +00:00:10; pkill -RTMIN+12 dwmblocks") }, 
 	// { MODKEY|ShiftMask,		XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "60+", NULL } } }, 
 
 	/* Navigational Keybinds */
@@ -317,7 +317,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ncmpcppvol.sh -d && sh ~/.config/scripts/music_volume.sh") },
 
 	/* Fn Keybinds */
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh ~/.config/scripts/spotify_volume.sh") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/spotify_volume.sh") },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "playerctl", "pause", NULL } } },
@@ -371,10 +371,10 @@ static const Button buttons[] = {
 	{ ClkTagBar,		0,		Button5,	shiftview,	{.i = 1} },
 	{ ClkRootWin,		0,		Button2,	togglebar,	{0} },
 
-	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next") },
-	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous") },
-	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next") },
-	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous") },
+	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
 	{ ClkClientWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 	{ ClkRootWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 };
