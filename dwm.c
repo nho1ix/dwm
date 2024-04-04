@@ -393,6 +393,7 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
+static int mon_refresh;
 
 static xcb_connection_t *xcon;
 
@@ -1687,7 +1688,7 @@ movemouse(const Arg *arg)
 			handler[ev.type](&ev);
 			break;
 		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 100))
+			if ((ev.xmotion.time - lasttime) <= (1000 / mon_refresh))
 				continue;
 			lasttime = ev.xmotion.time;
 
@@ -1902,7 +1903,7 @@ resizemouse(const Arg *arg)
 			handler[ev.type](&ev);
 			break;
 		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 100))
+			if ((ev.xmotion.time - lasttime) <= (1000 / mon_refresh))
 				continue;
 			lasttime = ev.xmotion.time;
 

@@ -7,35 +7,36 @@
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 6;       /* snap pixel */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 5;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const unsigned int systrayiconsize = 25; /* systray icon size in px */
-static const int showsystray        = 1;     /* 0 means no systray */
+static const unsigned int systraypinning   = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft    = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing   = 0;   /* systray spacing */
+static const int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const unsigned int systrayiconsize  = 25;  /* systray icon size in px */
+static const int showsystray  = 1;       /* 0 means no systray */
 static unsigned int gappih    = 0;       /* horiz inner gap between windows. default=15 */
 static unsigned int gappiv    = 0;       /* vert inner gap between windows. default=10 */
 static unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge. default=20 */
 static unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge. default=20 */
-static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static int showbar            = 0;        /* 0 means no bar */
-static int topbar             = 1;        /* 0 means bottom bar */
+static int swallowfloating    = 0;       /* 1 means swallow floating windows by default */
+static int smartgaps          = 0;       /* 1 means no outer gap when there is only one window */
+static int showbar            = 0;       /* 0 means no bar */
+static int topbar             = 1;       /* 0 means bottom bar */
+static int mon_refresh 				= 165;     /* monitor refresh rate */
 static const int horizpadbar        = 0;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 15;        /* vertical padding for statusbar */
 static const int vertpad = 0;     /* vertical padding of bar */
 static const int sidepad = 0;     /* horizontal padding of bar */
-static char *fonts[]          = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
-                                  "JetBrainsMono NFM:style=Regular:size=14",
-                                  "Apple Color Emoji:style=Regular:size=14",
-																	"Font Awesome 6 Free Regular:style=Regular" };
+static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
+                             "JetBrainsMono NFM:style=Regular:size=14",
+                             "Apple Color Emoji:style=Regular:size=14",
+												     "Font Awesome 6 Free Regular:style=Regular" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
 static char selfgcolor[]            = "#FFFFFF";
-static char selbordercolor[]            = "#8eacbd";  // mark-lin mountain
+static char selbordercolor[]        = "#8eacbd";  // mark-lin mountain
 static char selbgcolor[]            = "#212126";  // selected bg tag color
-static char textbgcolor[]            = "#b3b3b3";  // unselected monitor text
+static char textbgcolor[]           = "#b3b3b3";  // unselected monitor text
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -75,7 +76,6 @@ static char *tagsel[][2] = {
 	{ "#c2c2c2", selbgcolor },
 };
 
-
 static const unsigned int ulinepad	= 2;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
@@ -108,7 +108,6 @@ static int lpm[] = {
         /* Index of preferred layout], if LENGTH(lpm)<#monitors -> default layout */
         0, 1
 };
-
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -205,9 +204,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "spotify", NULL } } },
 	{ MODKEY|ShiftMask,			XK_m,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
-	// { MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
 	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "davinci", NULL } } },
-	{ MODKEY|ShiftMask,		XK_p,			spawn,          {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
+	{ MODKEY|ShiftMask,	  	XK_p,		spawn,    {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
 	
 	/* DWM Layouts */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
@@ -247,10 +245,8 @@ static const Key keys[] = {
 	/* Music / Playback Controls */
 	{ MODKEY,			XK_bracketleft,		spawn,		SHCMD("playerctl position 10- && ~/.config/scripts/skip-spotify.sh -b") },
 	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seekthrough -00:00:10; pkill -RTMIN+12 dwmblocks") }, 
-	// { MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "playerctl", "position", "60-", NULL } } },
 	{ MODKEY,			XK_bracketright,		spawn,		SHCMD("playerctl position 10+ && sh ~/.config/scripts/skip-spotify.sh -f") },
 	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seekthrough +00:00:10; pkill -RTMIN+12 dwmblocks") }, 
-	// { MODKEY|ShiftMask,		XK_bracketright,	spawn,		{.v = (const char*[]){ "playerctl", "position", "60+", NULL } } }, 
 
 	/* Navigational Keybinds */
 	{ MODKEY,			XK_s,		togglesticky,	{0} },
@@ -284,8 +280,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 
 	/* V is automatically bound above in STACKKEYS */
-	// { WINKEY,			XK_Home, spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=1.1:saturation=1:contrast=0.85:brightness=0.025:gamma_g=1.04\"; ~/.config/scripts/droidcam.sh") },
-	// { WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("killall ffmpeg; nohup ffmpeg -nostdin -vaapi_device /dev/dri/renderD128 -threads 12 -f v4l2 -i /dev/video0 -f v4l2 /dev/video1 -lavfi \"eq=gamma=2:saturation=1.75:contrast=1.06:brightness=0.05:gamma_g=0.99\"; ~/.config/scripts/droidcam.sh") },
 	{ WINKEY,			XK_Home,	spawn,   	SHCMD("python ~/Desktop/govee_btled/up_bright.py && sh ~/.config/scripts/govee_bright.sh") },
 	{ WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("python ~/Desktop/govee_btled/down_bright.py && sh ~/.config/scripts/govee_bright.sh") },
 	{ MODKEY,			XK_Page_Up,	spawn,   	SHCMD("escrotum -s $f ~/Pictures/Screenshots/Temporary/'%Y-%m-%d-%H%M%S_$wx$h_escrotum.png'") },
@@ -300,7 +294,7 @@ static const Key keys[] = {
 	// { MODKEY,			XK_F4,		spawn,		SHCMD("sct && xrandr --output HDMI-A-0 --gamma 1.28 && sh ~/.config/scripts/sct.sh -r") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh -r") },
 	{ MODKEY,			XK_F5,  	spawn,		SHCMD("kodi") },
-	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/here.jpg") }, // wall_1 choice
+	{ MODKEY,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/IMG_5683.jpg") }, // wall_1 choice
 	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/_DSF2004.JPG") }, // wall_2 choice
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; sh ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
@@ -311,15 +305,13 @@ static const Key keys[] = {
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ WINKEY,			XK_space,	spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
-	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -i") },
-	{ MODKEY|ShiftMask, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("sh ~/.config/scripts/ncmpcppvol.sh -i && sh ~/.config/scripts/music_volume.sh") },
-	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ytvol.sh -d") },
-	{ MODKEY|ShiftMask, XF86XK_AudioLowerVolume,	spawn,		SHCMD("sh ~/.config/scripts/ncmpcppvol.sh -d && sh ~/.config/scripts/music_volume.sh") },
+	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("zsh ~/.config/scripts/volume.sh -i") },
+	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("zsh ~/.config/scripts/volume.sh -d") },
 
 	/* Fn Keybinds */
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && sh ~/.config/scripts/spotify_volume.sh") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && sh ~/.config/scripts/spotify_volume.sh") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02+ && zsh ~/.config/scripts/volume.sh -S") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("playerctl -p spotify volume 0.02- && zsh ~/.config/scripts/volume.sh -S") },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "playerctl", "pause", NULL } } },
 	{ 0, XF86XK_AudioPlay,		spawn,		{.v = (const char*[]){ "playerctl", "play-pause", NULL } } },
 	{ 0, XF86XK_AudioStop,		spawn,		{.v = (const char*[]){ "playerctl", "stop", NULL } } },
@@ -361,6 +353,7 @@ static const Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	// Scroll wheel gaps
 	// { ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
 	// { ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -1} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
@@ -373,9 +366,9 @@ static const Button buttons[] = {
 
 	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
 	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
+	{ ClkClientWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 	{ ClkRootWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
 	{ ClkRootWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
-	{ ClkClientWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 	{ ClkRootWin,		0,            10,        spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 };
 
