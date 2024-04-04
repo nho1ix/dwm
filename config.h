@@ -207,8 +207,6 @@ static const Key keys[] = {
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} }, /* fullscreen */
-	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 
 	/* Console / Terminal Programs */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
@@ -226,7 +224,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_comma,				spawn,		SHCMD("mpc prev; pkill -RTMIN+12 dwmblocks") },
 	{ MODKEY|ShiftMask,			XK_period,			spawn,		SHCMD("mpc next; pkill -RTMIN+12 dwmblocks") },
 
-  /* Master Volume Controls */
+	/* Master Volume Controls */
 	{ MODKEY,			XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 5; pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 5; pkill -RTMIN+10 dwmblocks") },
 	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("pamixer --allow-boost -d 15; pkill -RTMIN+10 dwmblocks") },
@@ -250,6 +248,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	quit,		{1} },
 	{ MODKEY,			XK_Tab,		view,		{0} },
 	{ MODKEY,			XK_backslash,		view,		{0} },
+	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
@@ -270,8 +270,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_apostrophe,	togglesmartgaps,	{0} },
 
 	/* V is automatically bound above in STACKKEYS */
-	{ WINKEY,			XK_Home,						spawn,   	SHCMD("python ~/Desktop/govee_btled/up_bright.py && sh ~/.config/scripts/govee_bright.sh") },
-	{ WINKEY|ShiftMask,			XK_Home,	spawn,   	SHCMD("python ~/Desktop/govee_btled/down_bright.py && sh ~/.config/scripts/govee_bright.sh") },
 	{ MODKEY,			XK_Page_Up,					spawn,   	SHCMD("escrotum -s $f ~/Pictures/Screenshots/Temporary/'%Y-%m-%d-%H%M%S_$wx$h_escrotum.png'") },
 	{ MODKEY,			XK_Page_Down,				spawn,   	SHCMD("sh ~/.config/scripts/ipbat.sh") },
 	{ MODKEY,			XK_End,	  					spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
