@@ -85,7 +85,7 @@ static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
-	{ "spotify",  NULL,       NULL,             1 << 6,       0,           0,         0,         0,        1 },
+	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         1,         0,        1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
 	{ "webcord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
 	{ "vencord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
@@ -225,7 +225,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_p,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
-	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ytop", NULL } } },
+	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 
 	/* Spotify Keybinds */
