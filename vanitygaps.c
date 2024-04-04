@@ -1,12 +1,6 @@
 /* Key binding functions */
 static void defaultgaps(const Arg *arg);
 static void incrgaps(const Arg *arg);
-/* static void incrigaps(const Arg *arg); */
-/* static void incrogaps(const Arg *arg); */
-/* static void incrohgaps(const Arg *arg); */
-/* static void incrovgaps(const Arg *arg); */
-/* static void incrihgaps(const Arg *arg); */
-/* static void incrivgaps(const Arg *arg); */
 static void togglegaps(const Arg *arg);
 static void togglesmartgaps(const Arg *arg);
 
@@ -15,9 +9,6 @@ static void bstack(Monitor *m);
 static void centeredmaster(Monitor *m);
 static void centeredfloatingmaster(Monitor *m);
 static void deck(Monitor *m);
-static void dwindle(Monitor *m);
-static void fibonacci(Monitor *m, int s);
-static void spiral(Monitor *m);
 static void tile(Monitor *);
 
 /* Internals */
@@ -73,72 +64,6 @@ incrgaps(const Arg *arg)
 		selmon->gappiv + arg->i
 	);
 }
-
-/* static void */
-/* incrigaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih + arg->i, */
-/* 		selmon->gappiv + arg->i */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrogaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh + arg->i, */
-/* 		selmon->gappov + arg->i, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrohgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh + arg->i, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrovgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov + arg->i, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrihgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih + arg->i, */
-/* 		selmon->gappiv */
-/* 	); */
-/* } */
-
-/* static void */
-/* incrivgaps(const Arg *arg) */
-/* { */
-/* 	setgaps( */
-/* 		selmon->gappoh, */
-/* 		selmon->gappov, */
-/* 		selmon->gappih, */
-/* 		selmon->gappiv + arg->i */
-/* 	); */
-/* } */
 
 static void
 getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
@@ -427,110 +352,6 @@ deck(Monitor *m)
 		} else {
 			resize(c, sx, sy, sw - (2*c->bw), sh - (2*c->bw), 0);
 		}
-}
-
-/*
- * Fibonacci layout + gaps
- * https://dwm.suckless.org/patches/fibonacci/
- */
-
-void
-fibonacci(Monitor *m, int s)
-{
-	unsigned int i, n;
-	int nx, ny, nw, nh;
-	int oh, ov, ih, iv;
-	int nv, hrest = 0, wrest = 0, r = 1;
-	Client *c;
-
-	getgaps(m, &oh, &ov, &ih, &iv, &n);
-	if (n == 0)
-		return;
-
-	nx = m->wx + ov;
-	ny = m->wy + oh;
-	nw = m->ww - 2*ov;
-	nh = m->wh - 2*oh;
-
-	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
-		if (r) {
-			if ((i % 2 && (nh - ih) / 2 <= (bh + 2*c->bw))
-			   || (!(i % 2) && (nw - iv) / 2 <= (bh + 2*c->bw))) {
-				r = 0;
-			}
-			if (r && i < n - 1) {
-				if (i % 2) {
-					nv = (nh - ih) / 2;
-					hrest = nh - 2*nv - ih;
-					nh = nv;
-				} else {
-					nv = (nw - iv) / 2;
-					wrest = nw - 2*nv - iv;
-					nw = nv;
-				}
-
-				if ((i % 4) == 2 && !s)
-					nx += nw + iv;
-				else if ((i % 4) == 3 && !s)
-					ny += nh + ih;
-			}
-
-			if ((i % 4) == 0) {
-				if (s) {
-					ny += nh + ih;
-					nh += hrest;
-				}
-				else {
-					nh -= hrest;
-					ny -= nh + ih;
-				}
-			}
-			else if ((i % 4) == 1) {
-				nx += nw + iv;
-				nw += wrest;
-			}
-			else if ((i % 4) == 2) {
-				ny += nh + ih;
-				nh += hrest;
-				if (i < n - 1)
-					nw += wrest;
-			}
-			else if ((i % 4) == 3) {
-				if (s) {
-					nx += nw + iv;
-					nw -= wrest;
-				} else {
-					nw -= wrest;
-					nx -= nw + iv;
-					nh += hrest;
-				}
-			}
-			if (i == 0)	{
-				if (n != 1) {
-					nw = (m->ww - iv - 2*ov) - (m->ww - iv - 2*ov) * (1 - m->mfact);
-					wrest = 0;
-				}
-				ny = m->wy + oh;
-			}
-			else if (i == 1)
-				nw = m->ww - nw - iv - 2*ov;
-			i++;
-		}
-
-		resize(c, nx, ny, nw - (2*c->bw), nh - (2*c->bw), False);
-	}
-}
-
-static void
-dwindle(Monitor *m)
-{
-	fibonacci(m, 1);
-}
-
-static void
-spiral(Monitor *m)
-{
-	fibonacci(m, 0);
 }
 
 /*
