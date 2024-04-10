@@ -310,6 +310,7 @@ static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static Monitor *systraytomon(Monitor *m);
 static int stackpos(const Arg *arg);
+static int status2dtextlength(char* stext);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
@@ -667,9 +668,10 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
-		else if (ev->x > (x = selmon->ww - (int)TEXTW(stext) + lrpad - getsystraywidth())) {
+		else if (ev->x > (x = selmon->ww - (int)status2dtextlength(stext) + lrpad - getsystraywidth())) {
 			click = ClkStatusText;
 
+      // Handle clicks on the status text
 			char *text = rawstext;
 			int i = -1;
 			char ch;
