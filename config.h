@@ -29,6 +29,7 @@ static const unsigned int horizpadbar        = 0;        /* horizontal padding f
 static const unsigned int vertpadbar         = 15;        /* vertical padding for statusbar */
 static const unsigned int vertpad            = 0;     /* vertical padding of bar */
 static const unsigned int sidepad            = 0;     /* horizontal padding of bar */
+static const unsigned int markup             = 1;     /* process status2d text */
 static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
                              "JetBrainsMono NFM:style=Regular:size=14",
                              "Apple Color Emoji:style=Regular:size=14",
