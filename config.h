@@ -2,32 +2,33 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
+#define STATUSBAR "dwmblocks"
 static const char *discord[] = { "/usr/bin/discord" };
 static const char *email[]   = { "/usr/bin/thunderbird" };
 static const char *music[]   = { "/usr/bin/spotify" };
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int snap      = 6;       /* snap pixel */
-static const unsigned int systraypinning   = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft    = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing   = 5;   /* systray spacing */
-static const unsigned int systrayiconsize  = 25;  /* systray icon size in px */
+static const unsigned int borderpx           = 1;        /* border pixel of windows */
+static const unsigned int snap               = 6;       /* snap pixel */
+static const unsigned int systraypinning     = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft      = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing     = 5;   /* systray spacing */
+static const unsigned int systrayiconsize    = 25;  /* systray icon size in px */
 static const unsigned int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const unsigned int showsystray  = 1;       /* 0 means no systray */
-static unsigned int gappih    = 0;       /* horiz inner gap between windows. default=15 */
-static unsigned int gappiv    = 0;       /* vert inner gap between windows. default=10 */
-static unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge. default=20 */
-static unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge. default=20 */
-static unsigned int swallowfloating    = 0;       /* 1 means swallow floating windows by default */
-static unsigned int smartgaps          = 0;       /* 1 means no outer gap when there is only one window */
-static unsigned int showbar            = 1;       /* 0 means no bar */
-static unsigned int topbar             = 1;       /* 0 means bottom bar */
-static const unsigned int mon_refresh  = 165;     /* monitor refresh rate */
+static const unsigned int showsystray        = 1;       /* 0 means no systray */
+static const unsigned int gappih             = 0;       /* horiz inner gap between windows. default=15 */
+static const unsigned int gappiv             = 0;       /* vert inner gap between windows. default=10 */
+static const unsigned int gappoh             = 0;       /* horiz outer gap between windows and screen edge. default=20 */
+static const unsigned int gappov             = 0;       /* vert outer gap between windows and screen edge. default=20 */
+static unsigned int swallowfloating          = 0;       /* 1 means swallow floating windows by default */
+static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
+static unsigned int showbar                  = 1;       /* 0 means no bar */
+static unsigned int topbar                   = 1;       /* 0 means bottom bar */
+static const unsigned int mon_refresh        = 165;     /* monitor refresh rate */
 static const unsigned int horizpadbar        = 0;        /* horizontal padding for statusbar */
 static const unsigned int vertpadbar         = 15;        /* vertical padding for statusbar */
-static const unsigned int vertpad = 0;     /* vertical padding of bar */
-static const unsigned int sidepad = 0;     /* horizontal padding of bar */
+static const unsigned int vertpad            = 0;     /* vertical padding of bar */
+static const unsigned int sidepad            = 0;     /* horizontal padding of bar */
 static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
                              "JetBrainsMono NFM:style=Regular:size=14",
                              "Apple Color Emoji:style=Regular:size=14",
@@ -171,23 +172,14 @@ static const char *dmenucmd[] = { "dmenu_run", NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		// { "color0",		STRING,	&normbordercolor },
-		// { "color8",		STRING,	&selbordercolor },
 		{ "color17",		STRING,	&normbgcolor },
 		{ "color18",		STRING,	&normfgcolor },
 		{ "color18",		STRING,	&selfgcolor },
-		// { "color19",		STRING,	&selbgcolor },
-		{ "borderpx",		INTEGER, &borderpx },
-		{ "snap",		INTEGER, &snap },
 		{ "showbar",		INTEGER, &showbar },
 		{ "topbar",		INTEGER, &topbar },
 		{ "nmaster",		INTEGER, &nmaster },
 		{ "resizehints",	INTEGER, &resizehints },
 		{ "mfact",		FLOAT,	&mfact },
-		{ "gappih",		INTEGER, &gappih },
-		{ "gappiv",		INTEGER, &gappiv },
-		{ "gappoh",		INTEGER, &gappoh },
-		{ "gappov",		INTEGER, &gappov },
 		{ "swallowfloating",	INTEGER, &swallowfloating },
 		{ "smartgaps",		INTEGER, &smartgaps },
 };
@@ -362,6 +354,9 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
 #endif
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          {.v = (const char*[]){ TERMINAL, "-e", "nvim", "/home/victor/.config/suckless/dwm/config.h", NULL } } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
