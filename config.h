@@ -2,7 +2,9 @@
 /* Constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "/usr/bin/firefox"
+static const char *discord[] = { "/usr/bin/discord" };
+static const char *email[]   = { "/usr/bin/thunderbird" };
+static const char *music[]   = { "/usr/bin/spotify" };
 
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -11,7 +13,7 @@ static const unsigned int systraypinning   = 0;   /* 0: sloppy systray follows s
 static const unsigned int systrayonleft    = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing   = 5;   /* systray spacing */
 static const unsigned int systrayiconsize  = 25;  /* systray icon size in px */
-static const int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const unsigned int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const unsigned int showsystray  = 1;       /* 0 means no systray */
 static unsigned int gappih    = 0;       /* horiz inner gap between windows. default=15 */
 static unsigned int gappiv    = 0;       /* vert inner gap between windows. default=10 */
@@ -22,10 +24,10 @@ static unsigned int smartgaps          = 0;       /* 1 means no outer gap when t
 static unsigned int showbar            = 1;       /* 0 means no bar */
 static unsigned int topbar             = 1;       /* 0 means bottom bar */
 static const unsigned int mon_refresh  = 165;     /* monitor refresh rate */
-static const int horizpadbar        = 0;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 15;        /* vertical padding for statusbar */
-static const int vertpad = 0;     /* vertical padding of bar */
-static const int sidepad = 0;     /* horizontal padding of bar */
+static const unsigned int horizpadbar        = 0;        /* horizontal padding for statusbar */
+static const unsigned int vertpadbar         = 15;        /* vertical padding for statusbar */
+static const unsigned int vertpad = 0;     /* vertical padding of bar */
+static const unsigned int sidepad = 0;     /* horizontal padding of bar */
 static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
                              "JetBrainsMono NFM:style=Regular:size=14",
                              "Apple Color Emoji:style=Regular:size=14",
@@ -85,7 +87,7 @@ static const char *alttags[] = {
 
 static char *tagsel[][2] = {
 	{ "#ca9ee6", selbgcolor },
-	{ "#dc5656", selbgcolor },
+	{ "#e19e6a", selbgcolor },
 	{ "#e1b56a", selbgcolor },
 	{ "#aa71f4", selbgcolor },
 	{ "#dc5656", selbgcolor },
@@ -95,32 +97,32 @@ static char *tagsel[][2] = {
 	{ "#c2c2c2", selbgcolor },
 };
 
-static const unsigned int ulinepad	= 2;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinepad			= 2;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke		= 2;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
-static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
+static const unsigned int ulineall 			= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,        -1 },
-	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
+	{ "Gimp",     NULL,       NULL,       	    0,            0,           0,         0,         0,       -1 },
+	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
 	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         1,         0,        1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
 	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        1 },
-	{ "St",       NULL,       "weechat",       	    1 << 4,            0,           0,         1,         0,        1 },
-	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,        -1 },
+	{ "St",       NULL,       "weechat",       	1 << 4,       0,           0,         1,         0,        1 },
+	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
-	{ TERMCLASS,      "bg",        NULL,       	    1 << 7,       0,           1,         0,        -1 },
-	{ TERMCLASS,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
+	{ TERMCLASS,      "bg",        NULL,       	1 << 7,       0,           1,         0,        -1 },
+	{ TERMCLASS,      "spterm",    NULL,       	SPTAG(0),     1,           1,         0,        -1 },
 	{ NULL,       NULL,       "ru-turikhay-tlauncher-bootstrap-Bootstrap",   0,            1,           1,         0,        -1 },
 };
 
 /* layout(s) */
 static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
-static int nmaster     = 1;    /* number of clients in master area */
-static int resizehints = 0;    /* 1 means respect program default minimum window size. Default = 0 */
+static unsigned int nmaster     = 1;    /* number of clients in master area */
+static unsigned int resizehints = 0;    /* 1 means respect program default minimum window size. Default = 0 */
 
-static int lpm[] = {
+static unsigned int lpm[] = {
         /* Index of preferred layout], if LENGTH(lpm)<#monitors -> default layout */
         0, 1
 };
@@ -158,8 +160,12 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+/* helper for 1-liner commands */
+#define STRAIGHT(cmd) { .v = (const char*[]){ cmd, NULL } }
+
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *dmenucmd[] = { "dmenu_run", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -208,15 +214,15 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
 
 	/* Application Keybinds */
-	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ "firefox", NULL } } },
-	{ MODKEY|ShiftMask,		XK_b,		spawn,	        {.v = (const char*[]){ "ebook-viewer", NULL } } },
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		{.v = (const char*[]){ "chromium", NULL } } }, 
-	{ MODKEY,			XK_d,		spawn,		{.v = (const char*[]){ "discord", NULL } } },
-	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "thunderbird", NULL } } },
-	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "spotify", NULL } } },
-	{ MODKEY|ShiftMask,			XK_m,		spawn,		{.v = (const char*[]){ "obsidian", NULL } } },
-	{ MODKEY|ShiftMask,			XK_n,		spawn,		{.v = (const char*[]){ "davinci", NULL } } },
+	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]) { "firefox", NULL } } }, 
+	{ MODKEY,			XK_d,		spawn,		{.v = discord } },  
+	{ MODKEY,			XK_e,		spawn,		{.v = email } },  
+	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim" } } },
+	{ MODKEY,			XK_m,		spawn,		{.v = music } },  
+	{ MODKEY|ShiftMask,		XK_b,		spawn,	  STRAIGHT("ebook-viewer") },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		STRAIGHT("chromium") },
+	{ MODKEY|ShiftMask,			XK_m,		spawn,		STRAIGHT("obsidian") },
+	{ MODKEY|ShiftMask,			XK_n,		spawn,		STRAIGHT("davinci") },
 	{ MODKEY|ShiftMask,	  	XK_p,		spawn,    {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
 	
 	/* DWM Layouts */
@@ -230,14 +236,14 @@ static const Key keys[] = {
 
 	/* Console / Terminal Programs */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	{ MODKEY,			XK_p,		spawn,        {.v = (const char*[]){ "dmenu_run", NULL } } },
+	{ MODKEY,			XK_p,		spawn,        {.v = dmenucmd} },
 	{ MODKEY,			XK_r,		spawn,				{.v = (const char*[]){ TERMINAL, "-e", "", NULL } } },
 	{ MODKEY|ShiftMask,		XK_Return,				togglescratch,	{.ui = 0} },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 
 	/* Spotify Keybinds */
-	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p spotify && sh ~/.config/scripts/play-pause-spotify.sh") },
+	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p spotify && ~/.config/scripts/play-pause-spotify.sh") },
 	{ MODKEY,			XK_comma,				spawn,		SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
 	{ MODKEY,			XK_period,			spawn,		SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
 	{ MODKEY|ShiftMask,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p $(playerctl -l | rg firefox) && sh ~/.config/scripts/play-pause.sh") },
@@ -252,7 +258,7 @@ static const Key keys[] = {
 
 	/* Music / Playback Controls */
 	{ MODKEY,			XK_bracketleft,		spawn,		SHCMD("playerctl position 10- && ~/.config/scripts/skip-spotify.sh -b") },
-	{ MODKEY,			XK_bracketright,		spawn,		SHCMD("playerctl position 10+ && sh ~/.config/scripts/skip-spotify.sh -f") },
+	{ MODKEY,			XK_bracketright,		spawn,		SHCMD("playerctl position 10+ && ~/.config/scripts/skip-spotify.sh -f") },
 	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		SHCMD("mpc seekthrough -00:00:10; pkill -RTMIN+12 dwmblocks") }, 
 	{ MODKEY|ShiftMask,		XK_bracketright,	spawn,		SHCMD("mpc seekthrough +00:00:10; pkill -RTMIN+12 dwmblocks") }, 
 
@@ -271,8 +277,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
-	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
+	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY|ShiftMask,		XK_q,		killclient,		{0} },
 
 	/* Monitor Related Keybinds */
@@ -291,29 +297,29 @@ static const Key keys[] = {
 
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_Page_Up,					spawn,   	SHCMD("escrotum -s $f ~/Pictures/Screenshots/Temporary/'%Y-%m-%d-%H%M%S_$wx$h_escrotum.png'") },
-	{ MODKEY,			XK_Page_Down,				spawn,   	SHCMD("sh ~/.config/scripts/ipbat.sh") },
+	{ MODKEY,			XK_Page_Down,				spawn,   	SHCMD("~/.config/scripts/ipbat.sh") },
 	{ MODKEY,			XK_End,	  					spawn,		{.v = (const char*[]){ "killall", "xinit", NULL } } },
 
 	/* F1-F12 Keybinds */
-	{ MODKEY,			XK_F1,							spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && sh ~/.config/scripts/dcram.sh") }, // RAM Refresh
-	{ MODKEY,			XK_F2,							spawn,		{.v = (const char*[]){ "sh", "Documents/Important Files/Crontabs/Pacman Auto-Download.sh", NULL } } }, // Pacupg
-	{ MODKEY,			XK_F3,							spawn,		SHCMD("sct 3000 && xsct -c 1 3300 && sh ~/.config/scripts/sct.sh -f") }, // Set WB to 4500k
-	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct && xsct -c 1 5489 && sh ~/.config/scripts/sct.sh -r") }, // Set WB to 6500k
+	{ MODKEY,			XK_F1,							spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && ~/.config/scripts/dcram.sh") }, // RAM Refresh
+	{ MODKEY,			XK_F2,							spawn,		SHCMD("~/Documents/Important Files/Crontabs/Pacman Auto-Download.sh") }, // Pacupg
+	{ MODKEY,			XK_F3,							spawn,		SHCMD("sct 3000 && xsct -c 1 3300 && ~/.config/scripts/sct.sh -f") }, // Set WB to 4500k
+	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct && xsct -c 1 5489 && ~/.config/scripts/sct.sh -r") }, // Set WB to 6500k
 	{ MODKEY,			XK_F4,							spawn,		SHCMD("sct && sh ~/.config/scripts/sct.sh -r") },
-	{ MODKEY,			XK_F5,  						spawn,		SHCMD("kodi") },
-	{ MODKEY,			XK_F6,							spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/IMG_5683.jpg") }, // wall_1 choice
-	{ MODKEY|ShiftMask,			XK_F6,		spawn,		SHCMD("feh --bg-fill ~/.config/wall/_DSF3129e.JPG --bg-fill ~/.config/wall/_DSF2004.JPG") }, // wall_2 choice
+	{ MODKEY,			XK_F5,  						spawn,		STRAIGHT("kodi") },
+	{ MODKEY,			XK_F6,							spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/_DSF3129e.JPG", "--bg-fill", "/home/victor/.config/wall/IMG_5683.jpg", NULL } } }, // wall_1 choice
+	{ MODKEY|ShiftMask,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/_DSF3129e.JPG", "--bg-fill", "/home/victor/.config/wall/_DSF2004.JPG", NULL } } }, // wall_2 choice
 	{ MODKEY,			XK_F7,							spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
-	{ MODKEY,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; sh ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
-	{ MODKEY,			XK_F9,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --rotate normal --output HDMI-A-0 --left-of DisplayPort-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; sh ~/.config/wired/reset_wired_1920.sh") }, // 1080 1080 horiz
+	{ MODKEY,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
+	{ MODKEY,			XK_F9,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --rotate normal --output HDMI-A-0 --left-of DisplayPort-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_1920.sh") }, // 1080 1080 horiz
 	{ MODKEY,			XK_F10,							spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } }, // sleep
 	{ MODKEY,			XK_F11,							spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") }, // refresh status bar
-	{ MODKEY,			XK_F12,							spawn,		{.v = (const char*[]){ "picom", NULL } } }, // refresh compositor
-	{ MODKEY,			XK_space,						zoom,		{0} },
+	{ MODKEY,			XK_F12,							spawn,		STRAIGHT("picom") }, // refresh compositor
+	{ MODKEY,			XK_space,						zoom,		  {0} },
 	{ WINKEY,			XK_space,						spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
 	{ MODKEY|ShiftMask,		XK_space,		togglefloating,	{0} },
-	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("zsh ~/.config/scripts/volume.sh -i") },
-	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		SHCMD("zsh ~/.config/scripts/volume.sh -d") },
+	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		{.v = (const char*[]){ "~/.config/scripts/volume.sh", "-i", NULL } } },
+	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		{.v = (const char*[]){ "~/.config/scripts/volume.sh", "-d", NULL } } },
 
 	/* Fn Keybinds */
 	{ 0, XF86XK_AudioMute,				spawn,		SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
@@ -328,12 +334,12 @@ static const Key keys[] = {
 	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	{ 0, XF86XK_Calculator,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "weechat", NULL } } },
 	{ 0, XF86XK_Explorer,			spawn,		{.v = (const char*[]){ "obs", NULL } } },
-	{ 0, XF86XK_Sleep,				spawn,		{.v = (const char*[]){ "sudo", "-A", "zzz", NULL } } },
-	{ 0, XF86XK_WWW,		 			spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
+	{ 0, XF86XK_Sleep,				spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } },
+	{ 0, XF86XK_WWW,		 			spawn,		{.v = (const char*[]){ "firefox", NULL } } },  
 	{ 0, XF86XK_DOS,		 			spawn,		{.v = termcmd } },
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,			spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
-	{ 0, XF86XK_Mail,					spawn,		{.v = (const char*[]){ "xev", NULL } } },
+	{ 0, XF86XK_Mail,					spawn,		STRAIGHT("xev") },
 	{ 0, XF86XK_MyComputer,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub /", NULL } } },
 	{ 0, XF86XK_Launch1,			spawn,		{.v = (const char*[]){ "xset", "dpms", "force", "off", NULL } } },
 	{ 0, XF86XK_TouchpadToggle,			spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
@@ -378,4 +384,3 @@ static const Button buttons[] = {
 	{ ClkClientWin,		0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 	{ ClkRootWin,			0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
 };
-
