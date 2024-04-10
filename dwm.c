@@ -393,7 +393,6 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
-static int mon_refresh;
 
 static xcb_connection_t *xcon;
 
