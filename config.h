@@ -3,7 +3,7 @@
 #define TERMINAL "st"
 #define TERMCLASS "St"
 #define STATUSBAR "dwmblocks"
-static const char *discord[] = { "/usr/bin/discord" };
+static const char *discord[] = { "/usr/bin/vesktop" };
 static const char *email[]   = { "/usr/bin/thunderbird" };
 static const char *music[]   = { "/usr/bin/spotify" };
 
@@ -20,20 +20,18 @@ static const unsigned int gappih             = 0;       /* horiz inner gap betwe
 static const unsigned int gappiv             = 0;       /* vert inner gap between windows. default=10 */
 static const unsigned int gappoh             = 0;       /* horiz outer gap between windows and screen edge. default=20 */
 static const unsigned int gappov             = 0;       /* vert outer gap between windows and screen edge. default=20 */
-static unsigned int swallowfloating          = 0;       /* 1 means swallow floating windows by default */
-static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
-static unsigned int showbar                  = 1;       /* 0 means no bar */
-static unsigned int topbar                   = 1;       /* 0 means bottom bar */
+static const unsigned int swallowfloating    = 0;       /* 1 means swallow floating windows by default */
+static const unsigned int showbar            = 1;       /* 0 means no bar */
+static const unsigned int topbar             = 1;       /* 0 means bottom bar */
 static const unsigned int mon_refresh        = 165;     /* monitor refresh rate */
-static const unsigned int horizpadbar        = 0;        /* horizontal padding for statusbar */
-static const unsigned int vertpadbar         = 15;        /* vertical padding for statusbar */
-static const unsigned int vertpad            = 0;     /* vertical padding of bar */
-static const unsigned int sidepad            = 0;     /* horizontal padding of bar */
-static const unsigned int markup             = 1;     /* process status2d text */
+static const unsigned int horizpadbar        = 0;       /* horizontal padding for statusbar */
+static const unsigned int vertpadbar         = 15;      /* vertical padding for statusbar */
+static const unsigned int vertpad            = 0;       /* vertical padding of bar */
+static const unsigned int sidepad            = 0;       /* horizontal padding of bar */
+static const unsigned int markup             = 1;       /* process status2d text */
+static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
 static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
-                             "JetBrainsMono NFM:style=Regular:size=14",
-                             "Apple Color Emoji:style=Regular:size=14",
-												     "Font Awesome 6 Free Regular:style=Regular" };
+                             "JetBrainsMono NFM:style=Regular:size=18:antialias=true:autohint=true" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#FFFFFF";
@@ -64,38 +62,38 @@ static Sp scratchpads[] = {
 
 /* tagging */
 static const char *tags[] = { 
-	"一", // 1st
-	"二", // 2nd
-	"三", // 3rd
-	"四", // 4th
-	"五", // 5th
-	"六", // 6th
-	"七", // 7th
-	"八", // 8th
-	"九"  // 9th
+	"", // 1st
+	"", // 2nd
+	"", // 3rd
+	"", // 4th
+	"󰍡", // 5th
+	"", // 6th
+	"", // 7th
+	"", // 8th
+	"󰆩"  // 9th
 };
 
 static const char *alttags[] = { 
-	"[一]", // 1st
-	"[二]", // 2nd 
-	"[三]", // 3rd 
-	"[四]", // 4th 
-	"[五]", // 5th 
-	"[六]", // 6th 
-	"[七]", // 7th 
-	"[八]", // 8th 
-	"[九]"  // 9th
+	"", // 1st
+	"", // 2nd 
+	"󰆩", // 3rd 
+	"", // 4th 
+	"󰍡", // 5th 
+	"", // 6th 
+	"", // 7th 
+	"", // 8th 
+	""  // 9th
 };
 
 static char *tagsel[][2] = {
-	{ "#ca9ee6", selbgcolor },
-	{ "#e19e6a", selbgcolor },
+	{ "#84abeb", selbgcolor },
+	{ "#df6c2a", selbgcolor },
 	{ "#e1b56a", selbgcolor },
 	{ "#aa71f4", selbgcolor },
-	{ "#dc5656", selbgcolor },
+	{ "#ca9ee6", selbgcolor },
 	{ "#6fb482", selbgcolor },
 	{ "#33cc5e", selbgcolor },
-	{ "#84abeb", selbgcolor },
+	{ "#dc5656", selbgcolor },
 	{ "#c2c2c2", selbgcolor },
 };
 
@@ -110,6 +108,7 @@ static const Rule rules[] = {
 	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
 	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         1,         0,        1 },
 	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
+	{ "vesktop",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
 	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        1 },
 	{ "St",       NULL,       "weechat",       	1 << 4,       0,           0,         1,         0,        1 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
@@ -176,13 +175,10 @@ ResourcePref resources[] = {
 		{ "color17",		STRING,	&normbgcolor },
 		{ "color18",		STRING,	&normfgcolor },
 		{ "color18",		STRING,	&selfgcolor },
-		{ "showbar",		INTEGER, &showbar },
-		{ "topbar",		INTEGER, &topbar },
 		{ "nmaster",		INTEGER, &nmaster },
 		{ "resizehints",	INTEGER, &resizehints },
-		{ "mfact",		FLOAT,	&mfact },
-		{ "swallowfloating",	INTEGER, &swallowfloating },
 		{ "smartgaps",		INTEGER, &smartgaps },
+		{ "mfact",		FLOAT,	&mfact },
 };
 
 #include <X11/XF86keysym.h>
@@ -373,10 +369,10 @@ static const Button buttons[] = {
 	{ ClkTagBar,						0,							Button5,				shiftview,			{.i = 1} },
 	{ ClkRootWin,						0,							Button2,				togglebar,			{0} },
 
-	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
-	{ ClkRootWin,			0,            7,        spawn,        SHCMD("playerctl -p spotify next && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
-	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
-	{ ClkRootWin,			0,            6,        spawn,        SHCMD("playerctl -p spotify previous && ~/.local/bin/statusbar/sb-music_name; pkill -RTMIN+22 dwmblocks") },
-	{ ClkClientWin,		0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
-	{ ClkRootWin,			0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause && sh ~/.config/scripts/play-pause.sh") },
+	{ ClkClientWin,		0,            7,        spawn,        SHCMD("playerctl -p spotify next; pkill -RTMIN+22 dwmblocks") },
+	{ ClkRootWin,			0,            7,        spawn,        SHCMD("playerctl -p spotify next; pkill -RTMIN+22 dwmblocks") },
+	{ ClkClientWin,		0,            6,        spawn,        SHCMD("playerctl -p spotify previous; pkill -RTMIN+22 dwmblocks") },
+	{ ClkRootWin,			0,            6,        spawn,        SHCMD("playerctl -p spotify previous; pkill -RTMIN+22 dwmblocks") },
+	{ ClkClientWin,		0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause; sh ~/.config/scripts/play-pause-spotify.sh") },
+	{ ClkRootWin,			0,            10,       spawn,        SHCMD("playerctl -p spotify play-pause; sh ~/.config/scripts/play-pause-spotify.sh") },
 };
