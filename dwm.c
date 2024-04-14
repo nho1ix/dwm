@@ -39,7 +39,6 @@
 #include <X11/Xproto.h>
 #include <X11/Xresource.h>
 #include <X11/Xutil.h>
-#include <X11/Xresource.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
@@ -2051,7 +2050,7 @@ run(void)
 
 void
 runAutostart(void) {
-	system("killall -9 dwmblocks && dwmblocks &");
+	system("killall -q dwmblocks; dwmblocks &");
 }
 
 void
@@ -2435,11 +2434,11 @@ sigchld(int unused)
 	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
-extern char **environ;
 
 void
 spawn(const Arg *arg)
 {
+	extern char **environ;
  	posix_spawnp(NULL, ((char **)arg->v)[0], NULL, NULL, (char **)arg->v, environ);
 }
 
