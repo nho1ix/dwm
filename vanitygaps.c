@@ -26,7 +26,7 @@ static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int
 static void setgaps(int oh, int ov, int ih, int iv);
 
 /* Settings */
-static int enablegaps = 1;
+static unsigned int enablegaps = 1;
 
 static void
 setgaps(int oh, int ov, int ih, int iv)
