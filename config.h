@@ -302,7 +302,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
 	{ MODKEY,			XK_F9,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --rotate normal --output HDMI-A-0 --left-of DisplayPort-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_1920.sh") }, // 1080 1080 horiz
 	{ MODKEY,			XK_F10,							spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } }, // sleep
-	{ MODKEY,			XK_F11,							spawn,		SHCMD("killall -9 dwmblocks && dwmblocks") }, // refresh status bar
+	{ MODKEY,			XK_F11,							spawn,		SHCMD("killall -q dwmblocks; dwmblocks") }, // refresh status bar
 	{ MODKEY,			XK_F12,							spawn,		STRAIGHT("picom") }, // refresh compositor
 	{ MODKEY,			XK_space,						zoom,		  {0} },
 	{ WINKEY,			XK_space,						spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
