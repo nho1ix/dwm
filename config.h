@@ -64,13 +64,13 @@ static Sp scratchpads[] = {
 static const char *tags[] = { 
 	"", // 1st
 	"", // 2nd
-	"", // 3rd
+	"󰆩", // 3rd
 	"", // 4th
 	"󰍡", // 5th
 	"", // 6th
 	"", // 7th
 	"", // 8th
-	"󰆩"  // 9th
+	""  // 9th
 };
 
 static const char *alttags[] = { 
@@ -159,10 +159,11 @@ static const Layout layouts[] = {
 	{ MOD,  XK_v,   ACTION##stack,  {.i = 0 } }, \
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) {.v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define STCMD(cmd) {.v = (const char*[]){ TERMINAL, "-e", cmd, NULL } }
 
 /* helper for 1-liner commands */
-#define STRAIGHT(cmd) { .v = (const char*[]){ cmd, NULL } }
+#define STRAIGHT(cmd) {.v = (const char*[]){ cmd, NULL } }
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
@@ -188,7 +189,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
-	{ MODKEY,			XK_grave,	spawn,	{.v = (const char*[]){ "dmenuunicode", NULL } } },
+	{ MODKEY,			XK_grave,	spawn,	STRAIGHT("dmenuunicode") },
 	{ False|ControlMask,		XK_grave,	spawn,	{.v = (const char*[]){ "wired", "-s", "1", NULL } } },
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -203,16 +204,16 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
 
 	/* Application Keybinds */
-	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]) { "firefox", NULL } } }, 
+	{ MODKEY,			XK_w,		spawn,		STRAIGHT("firefox") },
 	{ MODKEY,			XK_d,		spawn,		{.v = discord } },  
 	{ MODKEY,			XK_e,		spawn,		{.v = email } },  
-	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim" } } },
+	{ MODKEY,			XK_n,		spawn,		STCMD("nvim") },
 	{ MODKEY,			XK_m,		spawn,		{.v = music } },  
 	{ MODKEY|ShiftMask,		XK_b,		spawn,	  STRAIGHT("ebook-viewer") },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		STRAIGHT("chromium") },
 	{ MODKEY|ShiftMask,			XK_m,		spawn,		STRAIGHT("obsidian") },
 	{ MODKEY|ShiftMask,			XK_n,		spawn,		STRAIGHT("davinci") },
-	{ MODKEY|ShiftMask,	  	XK_p,		spawn,    {.v = (const char*[]){ TERMINAL, "-e", ".config/vifm/scripts/vifmrun", NULL } } }, 
+	{ MODKEY|ShiftMask,	  	XK_p,		spawn,    STCMD(".config/vifm/scripts/vifmrun") },
 	
 	/* DWM Layouts */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
@@ -226,10 +227,10 @@ static const Key keys[] = {
 	/* Console / Terminal Programs */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	{ MODKEY,			XK_p,		spawn,        {.v = dmenucmd} },
-	{ MODKEY,			XK_r,		spawn,				{.v = (const char*[]){ TERMINAL, "-e", "", NULL } } },
+	{ MODKEY,			XK_r,		spawn,				STCMD("") },
 	{ MODKEY|ShiftMask,		XK_Return,				togglescratch,	{.ui = 0} },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
-	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
+	{ MODKEY|ShiftMask,		XK_r,		spawn,		STCMD("htop") },
 
 	/* Spotify Keybinds */
 	{ MODKEY,			XK_apostrophe,	spawn,		SHCMD("playerctl play-pause -p spotify && ~/.config/scripts/play-pause-spotify.sh") },
@@ -356,7 +357,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          {.v = (const char*[]){ TERMINAL, "-e", "nvim", "/home/victor/.config/suckless/dwm/config.h", NULL } } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
+	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	  {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	// Scroll wheel gaps
 	// { ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +1} },
