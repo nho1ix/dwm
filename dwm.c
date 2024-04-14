@@ -2436,7 +2436,12 @@ extern char **environ;
 void
 spawn(const Arg *arg)
 {
-	posix_spawnp(NULL, ((char **)arg->v)[0], NULL, NULL, (char **)arg->v, environ);
+	struct sigaction sa;
+ 	posix_spawnp(NULL, ((char **)arg->v)[0], NULL, NULL, (char **)arg->v, environ);
+ 	sigemptyset(&sa.sa_mask);
+ 	sa.sa_flags = 0;
+ 	sa.sa_handler = SIG_DFL;
+ 	sigaction(SIGCHLD, &sa, NULL);
 }
 
 void
