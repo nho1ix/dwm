@@ -305,7 +305,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F11,							spawn,		SHCMD("killall -q dwmblocks; dwmblocks") }, // refresh status bar
 	{ MODKEY,			XK_F12,							spawn,		STRAIGHT("picom") }, // refresh compositor
 	{ MODKEY,			XK_space,						zoom,		  {0} },
-	{ WINKEY,			XK_space,						spawn,		{.v = (const char*[]){ "wired", "-d", "latest", NULL } } },
+	{ WINKEY,			XK_space,						spawn,		SHCMD("wired -d latest") },
 	{ MODKEY|ShiftMask,		XK_space,		togglefloating,	{0} },
 	{ MODKEY, XF86XK_AudioRaiseVolume,	spawn,		{.v = (const char*[]){ "~/.config/scripts/volume.sh", "-i", NULL } } },
 	{ MODKEY, XF86XK_AudioLowerVolume,	spawn,		{.v = (const char*[]){ "~/.config/scripts/volume.sh", "-d", NULL } } },
