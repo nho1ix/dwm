@@ -125,7 +125,6 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
         int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow, issticky, iscentered;
-//	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow, issticky;
   int issteam;
 	pid_t pid;
 	Client *next;
