@@ -30,7 +30,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lX11-xcb -lxcb -lxcb-r
 # Optional compiler optimizations may create smaller binaries and
 # faster code, but increases compile time.
 # See https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
-OPTIMIZATIONS = -march=native -flto=auto -Ofast
+OPTIMIZATIONS = -march=native -flto=auto -O2
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
