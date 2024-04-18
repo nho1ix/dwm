@@ -1208,7 +1208,7 @@ drawbar(Monitor *m)
 //			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 			drw_setscheme(drw, scheme[m == selmon ? SchemeInfoSel : SchemeInfoNorm]);
 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0, markup); 
-//			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
+//			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {

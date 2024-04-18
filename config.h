@@ -103,17 +103,18 @@ static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the b
 static const unsigned int ulineall 			= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
-	/* class    instance      title       	 tags mask    isfloating   isterminal  noswallow  monitor */
-	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
-	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,         1,         0,        1 },
-	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
-	{ "vesktop",  NULL,       NULL,             1 << 3,       0,           0,         0,         0,        1 },
-	{ "obs",      NULL,       NULL,       	    1 << 8,       0,           0,         1,         0,        1 },
-	{ "St",       NULL,       "weechat",       	1 << 4,       0,           0,         1,         0,        1 },
-	{ "St",       NULL,       NULL,       	    0,            0,           0,         1,         0,       -1 },
-	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
-	{ TERMCLASS,      "bg",        NULL,       	1 << 7,       0,           1,         0,        -1 },
-	{ TERMCLASS,      "spterm",    NULL,       	SPTAG(0),     1,           1,         0,        -1 },
+	/* class    instance      title       	 tags mask   	iscentered   isfloating   isterminal  noswallow  monitor */ // regex importance is bottom to top
+	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,           0,         0,        1 },
+	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        1 },
+	{ "vesktop",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        1 },
+	{ "obs",      "obs",       "OBS",      	    1 << 8,       0,           0,           0,         0,        1 },
+	{ "obsidian", "obsidian",  "Obsidian",  	 	1 << 4,       0,           0,           0,         0,        0 },
+	{ "St",       NULL,       NULL,       	    0,            0,           0,           1,         0,       -1 },
+	{ "St",       NULL,       "weechat",       	1 << 4,  			0,           0,           1,         0,        1 },
+	{ NULL,       NULL,       "Event Tester",   0,            0,           0,           1,         0,				-1 },
+	{ TERMCLASS,      "bg",        NULL,       	1 << 7,       0,           1,           0,         0,				-1 },
+	{ TERMCLASS,      "spterm",    NULL,       	SPTAG(0),     1,           1,           0,         0,				-1 },
+	{ TERMCLASS,   NULL,       NULL,       	    0,            0,           0,           1,         0,       -1 },
 	{ NULL,       NULL,       "ru-turikhay-tlauncher-bootstrap-Bootstrap",   0,            1,           1,         0,        -1 },
 };
 
