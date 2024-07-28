@@ -30,7 +30,7 @@ static const unsigned int vertpad            = 0;       /* vertical padding of b
 static const unsigned int sidepad            = 0;       /* horizontal padding of bar */
 static const unsigned int markup             = 1;       /* process status2d text */
 static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
-static char *fonts[]     = { "Overpass:style=Regular:size=11:antialias=true:autohint=true", 
+static char *fonts[]     = { "Overpass:style=Regular:size=10:antialias=true:autohint=true", 
                              "JetBrainsMono NFM:style=Regular:size=18:antialias=true:autohint=true" };
 static char normbgcolor[]           = "#000000"; // default
 static char normbordercolor[]       = "#444444";
@@ -132,16 +132,16 @@ static unsigned int lpm[] = {
 #include "vanitygaps.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",	tile },			/* Default: Master on left, slaves on right */
-	{ "TTT",	bstack },		/* Master on top, slaves on bottom */
+	{ "[]=",	tile },	                /* Default: Master on left, slaves on right */
+	{ "TTT",	bstack },               /* Master on top, slaves on bottom */
 
 	{ "[D]",	deck },			/* Master on left, slaves in monocle-like mode on right */
 	{ "[M]",	monocle },		/* All windows on top of eachother */
 
-	{ "|M|",	centeredmaster },		/* Master in middle, slaves on sides */
-	{ ">M>",	centeredfloatingmaster },	/* Same but master floats */
+	{ "|M|",	centeredmaster },               /* Master in middle, slaves on sides */
+	{ ">M>",	centeredfloatingmaster },       /* Same but master floats */
 
-	{ "><>",	NULL },			/* no layout function means floating behavior */
+	{ "><>",	NULL },	                /* no layout function means floating behavior */
 	{ NULL,		NULL },
 };
 
@@ -342,15 +342,15 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
+	/* click                event mask           button          function        argument */
 #ifndef __OpenBSD__
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
-	{ ClkStatusText,        0,              Button4,        sigdwmblocks,   {.i = 4} },
-	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
-	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
+	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
+	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1} },
+	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2} },
+	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3} },
+	{ ClkStatusText,        0,                   Button4,        sigdwmblocks,   {.i = 4} },
+	{ ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5} },
+	{ ClkStatusText,        ShiftMask,           Button1,        sigdwmblocks,   {.i = 6} },
 #endif
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },

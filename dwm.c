@@ -2434,6 +2434,7 @@ sigchld(int unused)
 	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
+extern char **environ;
 
 void
 spawn(const Arg *arg)
