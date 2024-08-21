@@ -105,9 +105,9 @@ static const unsigned int ulineall 			= 0;	/* 1 to show underline on all tags, 0
 static const Rule rules[] = {
 	/* class    instance      title       	 tags mask   	iscentered   isfloating   isterminal  noswallow  monitor */ // regex importance is bottom to top
 	{ "Spotify",  NULL,       NULL,             1 << 6,       0,           0,           0,         0,        1 },
-	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        1 },
-	{ "vesktop",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        1 },
-	{ "obs",      "obs",       "OBS",      	    1 << 8,       0,           0,           0,         0,        1 },
+	{ "discord",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        2 },
+	{ "vesktop",  NULL,       NULL,             1 << 3,       0,           0,           0,         0,        2 },
+	{ "obs",      "obs",       "OBS",      	    1 << 8,       0,           0,           0,         0,        2 },
 	{ "obsidian", "obsidian",  "Obsidian",  	 	1 << 4,       0,           0,           0,         0,        0 },
 	{ "St",       NULL,       NULL,       	    0,            0,           0,           1,         0,       -1 },
 	{ "St",       NULL,       "weechat",       	1 << 4,  			0,           0,           1,         0,        1 },
@@ -293,12 +293,12 @@ static const Key keys[] = {
 	/* F1-F12 Keybinds */
 	{ MODKEY,			XK_F1,							spawn,		SHCMD("sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches && ~/.config/scripts/dcram.sh") }, // RAM Refresh
 	{ MODKEY,			XK_F2,							spawn,		SHCMD("~/Documents/Important Files/Crontabs/Pacman Auto-Download.sh") }, // Pacupg
-	{ MODKEY,			XK_F3,							spawn,		SHCMD("sct 3000; xsct -c 1 3300; ~/.config/scripts/sct.sh -f") }, // Set WB to 4500k
+	{ MODKEY,			XK_F3,							spawn,		SHCMD("sct 3000; xsct -c 1 3300; ~/.config/scripts/sct.sh -f; xsct -c 2 3700") }, // Set WB to 4500k
 	{ MODKEY|ShiftMask,			XK_F3,		spawn,		SHCMD("sct; xsct -c 1 5489; ~/.config/scripts/sct.sh -r") }, // Set WB to 6500k
 	{ MODKEY,			XK_F4,							spawn,		SHCMD("sct; sh ~/.config/scripts/sct.sh -r") },
 	{ MODKEY,			XK_F5,  						spawn,		STRAIGHT("kodi") },
-	{ MODKEY,			XK_F6,							spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/_DSF3129e.JPG", "--bg-fill", "/home/victor/.config/wall/IMG_5683.jpg", NULL } } }, // wall_1 choice
-	{ MODKEY|ShiftMask,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/_DSF3129e.JPG", "--bg-fill", "/home/victor/.config/wall/_DSF2004.JPG", NULL } } }, // wall_2 choice
+	{ MODKEY,			XK_F6,							spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/minecraft.png", "--bg-fill", "/home/victor/.config/wall/_DSF2051.JPG", "--bg-fill", "/home/victor/.config/wall/_DSF3769.jpg", NULL } } }, // wall_1 choice
+	{ MODKEY|ShiftMask,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/minecraft.png", "--bg-fill", "/home/victor/.config/wall/_DSF2004.JPG", NULL } } }, // wall_2 choice
 	{ MODKEY,			XK_F7,							spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
 	{ MODKEY,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
 	{ MODKEY,			XK_F9,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --rotate normal --output HDMI-A-0 --left-of DisplayPort-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_1920.sh") }, // 1080 1080 horiz
