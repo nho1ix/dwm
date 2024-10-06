@@ -8,7 +8,7 @@ static const char *email[]   = { "/usr/bin/thunderbird" };
 static const char *music[]   = { "/usr/bin/spotify" };
 
 /* appearance */
-static const unsigned int borderpx           = 1;        /* border pixel of windows */
+static const unsigned int borderpx           = 10;        /* border pixel of windows */
 static const unsigned int snap               = 6;       /* snap pixel */
 static const unsigned int systraypinning     = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft      = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -301,6 +301,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,			XK_F6,		spawn,		{.v = (const char*[]){ "feh", "--bg-fill", "/home/victor/.config/wall/minecraft.png", "--bg-fill", "/home/victor/.config/wall/_DSF2004.JPG", NULL } } }, // wall_2 choice
 	{ MODKEY,			XK_F7,							spawn,		SHCMD("nmcli con down dank && nmcli con up dank && sh ~/.config/scripts/refresh_wifi.sh") },
 	{ MODKEY,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 3840x2160_165 --pos 1920x-700 --rotate normal --output HDMI-A-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_3840.sh") }, // 4k 1080 horiz
+																																																																																																																															//
+	{ MODKEY|ShiftMask,			XK_F8,							spawn,		SHCMD("xrandr --output DisplayPort-0 --mode 3840x2160_100 && xrandr --output DisplayPort-0 --mode 3840x2160_165") }, // 4k reset
 	{ MODKEY,			XK_F9,							spawn,		SHCMD("xrandr --output DisplayPort-0 --primary --mode 1920x1080_165 --rotate normal --output HDMI-A-0 --left-of DisplayPort-0 --mode 1920x1080_74 --scale 1x1 --rotate normal; ~/.config/wired/reset_wired_1920.sh") }, // 1080 1080 horiz
 	{ MODKEY,			XK_F10,							spawn,		{.v = (const char*[]){ "sudo", "systemctl", "suspend", NULL } } }, // sleep
 	{ MODKEY,			XK_F11,							spawn,		SHCMD("killall -q dwmblocks; dwmblocks") }, // refresh status bar
