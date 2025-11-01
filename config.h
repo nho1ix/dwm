@@ -31,7 +31,8 @@ static const unsigned int markup             = 1;       /* process status2d text
 static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
 static char *fonts[]     = { "Overpass:style=Regular:size=10:antialias=true:autohint=true", 
 														 "Font Awesome 5 Brands Regular:style=Regular",
-                             "JetBrainsMono NFM:style=Regular:size=18:antialias=true:autohint=true" };
+                             "JetBrainsMono NFM:style=Regular:size=18:antialias=true:autohint=true",
+														 "Source Han Sans CN,CN:style=Regular" };
 static char normbgcolor[]           = "#171208"; // default
 static char normbordercolor[]       = "#674f23";
 static char normfgcolor[]           = "#eee5d8";
@@ -64,36 +65,36 @@ static Sp scratchpads[] = {
 static const char *tags[] = { 
 	" ", // 1st
 	" ", // 2nd
-	"󰆩 ", // 3rd
+	" ", // 3rd
 	"", // 4th
 	"󰍡 ", // 5th
 	" ", // 6th
 	" ", // 7th
-	" ", // 8th
+	"󰆩 ", // 8th
 	""  // 9th
 };
 
 static const char *alttags[] = { 
 	"", // 1st
 	"", // 2nd 
-	"󰆩", // 3rd 
+	"", // 3rd 
 	"", // 4th 
 	"󰍡", // 5th 
 	"", // 6th 
 	"", // 7th 
-	"", // 8th 
+	"󰆩", // 8th
 	""  // 9th
 };
 
 static char *tagsel[][2] = {
 	{ "#84abeb", selbgcolor },
 	{ "#df6c2a", selbgcolor },
-	{ "#e1b56a", selbgcolor },
+	{ "#dc5656", selbgcolor },
 	{ "#aa71f4", selbgcolor },
 	{ "#ca9ee6", selbgcolor },
 	{ "#6fb482", selbgcolor },
 	{ "#33cc5e", selbgcolor },
-	{ "#dc5656", selbgcolor },
+	{ "#e1b56a", selbgcolor },
 	{ "#c2c2c2", selbgcolor },
 };
 
@@ -214,7 +215,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		STRAIGHT("chromium") },
 	{ MODKEY|ShiftMask,			XK_m,		spawn,		STRAIGHT("obsidian") },
 	{ MODKEY|ShiftMask,			XK_n,		spawn,		STRAIGHT("davinci") },
-	{ MODKEY|ShiftMask,	  	XK_p,		spawn,    STCMD(".config/vifm/scripts/vifmrun") },
+	{ MODKEY|ShiftMask,       XK_p,     spawn,   {.v = (const char*[]){ "sh", "-c", "st -e ~/.config/vifm/scripts/vifmrun", NULL } } },
 	
 	/* DWM Layouts */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
