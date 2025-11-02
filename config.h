@@ -7,29 +7,29 @@ static const char *discord[] = { "/usr/bin/equibop" };
 static const char *music[]   = { "/usr/bin/spotify" };
 
 /* appearance */
-static const unsigned int borderpx           = 1;        /* border pixel of windows */
-static const unsigned int snap               = 6;       /* snap pixel */
-static const unsigned int systraypinning     = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft      = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing     = 5;   /* systray spacing */
-static const unsigned int systrayiconsize    = 25;  /* systray icon size in px */
-static const unsigned int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const unsigned int showsystray        = 1;       /* 0 means no systray */
-static const unsigned int gappih             = 0;       /* horiz inner gap between windows. default=15 */
-static const unsigned int gappiv             = 0;       /* vert inner gap between windows. default=10 */
-static const unsigned int gappoh             = 0;       /* horiz outer gap between windows and screen edge. default=20 */
-static const unsigned int gappov             = 0;       /* vert outer gap between windows and screen edge. default=20 */
-static const unsigned int swallowfloating    = 0;       /* 1 means swallow floating windows by default */
-static const unsigned int showbar            = 1;       /* 0 means no bar */
-static const unsigned int topbar             = 1;       /* 0 means bottom bar */
-static const unsigned int mon_refresh        = 165;     /* monitor refresh rate */
-static const unsigned int horizpadbar        = 0;       /* horizontal padding for statusbar */
-static const unsigned int vertpadbar         = 15;      /* vertical padding for statusbar */
-static const unsigned int vertpad            = 0;       /* vertical padding of bar */
-static const unsigned int sidepad            = 0;       /* horizontal padding of bar */
-static const unsigned int markup             = 1;       /* process status2d text */
-static unsigned int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
-static char *fonts[]     = { "Overpass:style=Regular:size=10:antialias=true:autohint=true", 
+static const int borderpx           = 1;        /* border pixel of windows */
+static const int snap               = 6;       /* snap pixel */
+static const int systraypinning     = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const int systrayonleft      = 0;  	/* 0: systray in the right corner, >0: systray on left of status text */
+static const int systrayspacing     = 5;   /* systray spacing */
+static const int systrayiconsize    = 25;  /* systray icon size in px */
+static const int systraypinningfailfirst   = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;       /* 0 means no systray */
+static const int gappih             = 0;       /* horiz inner gap between windows. default=15 */
+static const int gappiv             = 0;       /* vert inner gap between windows. default=10 */
+static const int gappoh             = 0;       /* horiz outer gap between windows and screen edge. default=20 */
+static const int gappov             = 0;       /* vert outer gap between windows and screen edge. default=20 */
+static const int swallowfloating    = 0;       /* 1 means swallow floating windows by default */
+static const int showbar            = 1;       /* 0 means no bar */
+static const int topbar             = 1;       /* 0 means bottom bar */
+static const int refreshrate        = 165;     /* monitor refresh rate */
+static const int horizpadbar        = 0;       /* horizontal padding for statusbar */
+static const int vertpadbar         = 15;      /* vertical padding for statusbar */
+static const int vertpad            = 0;       /* vertical padding of bar */
+static const int sidepad            = 0;       /* horizontal padding of bar */
+static const int markup             = 1;       /* process status2d text */
+static int smartgaps                = 0;       /* 1 means no outer gap when there is only one window */
+static const char *fonts[]     = { "Overpass:style=Regular:size=10:antialias=true:autohint=true", 
 														 "Font Awesome 5 Brands Regular:style=Regular",
                              "JetBrainsMono NFM:style=Regular:size=18:antialias=true:autohint=true",
 														 "Source Han Sans CN,CN:style=Regular" };
@@ -40,7 +40,7 @@ static char selfgcolor[]            = "#eee5d8";
 static char selbordercolor[]        = "#6d8d39";  
 static char selbgcolor[]            = "#342913";  // selected bg tag color
 static char textbgcolor[]           = "#d0b795";  // unselected monitor text
-static char *colors[][3] = {
+static const char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] 		= { normfgcolor, normbgcolor,  normbordercolor },
        [SchemeSel]  		= { selfgcolor,  normfgcolor,  selbordercolor  },
@@ -86,7 +86,7 @@ static const char *alttags[] = {
 	""  // 9th
 };
 
-static char *tagsel[][2] = {
+static const char *tagsel[][2] = {
 	{ "#84abeb", selbgcolor },
 	{ "#df6c2a", selbgcolor },
 	{ "#dc5656", selbgcolor },
@@ -98,10 +98,10 @@ static char *tagsel[][2] = {
 	{ "#c2c2c2", selbgcolor },
 };
 
-static const unsigned int ulinepad			= 2;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke		= 2;	/* thickness / height of the underline */
-static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
-static const unsigned int ulineall 			= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
+static const int ulinepad			= 2;	/* horizontal padding between the underline and tag */
+static const int ulinestroke		= 2;	/* thickness / height of the underline */
+static const int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 			= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* class    instance      title       	 tags mask   	iscentered   isfloating   isterminal  noswallow  monitor */ // regex importance is bottom to top
@@ -123,10 +123,10 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
-static unsigned int nmaster     = 1;    /* number of clients in master area */
-static unsigned int resizehints = 0;    /* 1 means respect program default minimum window size. Default = 0 */
+static int nmaster     = 1;    /* number of clients in master area */
+static int resizehints = 0;    /* 1 means respect program default minimum window size. Default = 0 */
 
-static unsigned int lpm[] = {
+static int lpm[] = {
         /* Index of preferred layout], if LENGTH(lpm)<#monitors -> default layout */
         0, 1
 };
